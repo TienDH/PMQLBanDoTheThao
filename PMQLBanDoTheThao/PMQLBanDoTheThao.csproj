@@ -81,7 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controler\" />
-    <Folder Include="Data\" />
+    <Folder Include="DataBase\" />
     <Folder Include="Model\" />
     <Folder Include="View\" />
   </ItemGroup>
