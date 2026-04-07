@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-<<<<<<< Updated upstream
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // panel1
@@ -64,22 +64,24 @@
             this.panel3.Size = new System.Drawing.Size(139, 54);
             this.panel3.TabIndex = 2;
             // 
-=======
-            this.SuspendLayout();
+            // button1
             // 
->>>>>>> Stashed changes
+            this.button1.Location = new System.Drawing.Point(333, 164);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(195, 164);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< Updated upstream
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-=======
-            this.ClientSize = new System.Drawing.Size(855, 737);
->>>>>>> Stashed changes
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -92,6 +94,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button button1;
 =======
 >>>>>>> Stashed changes
     }
