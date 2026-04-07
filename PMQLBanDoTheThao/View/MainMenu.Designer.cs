@@ -1,6 +1,6 @@
 ﻿namespace PMQLBanDoTheThao
 {
-    partial class Form1
+    partial class MainMenu
     {
         /// <summary>
         /// Required designer variable.
