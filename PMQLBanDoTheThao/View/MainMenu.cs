@@ -16,5 +16,10 @@ namespace PMQLBanDoTheThao
         {
             InitializeComponent();
         }
+
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
