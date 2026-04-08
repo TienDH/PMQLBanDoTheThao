@@ -218,11 +218,31 @@ namespace PMQLBanDoTheThao.View
 
             if (!ValidateVariantInput()) return;
 
+            int sizeId = Convert.ToInt32(cmbSize.SelectedValue);
+            int colorId = Convert.ToInt32(cmbMau.SelectedValue);
+
+            // 🔥 CHECK TRÙNG NGAY TRÊN GRID
+            foreach (DataGridViewRow row in dgvBienThe.Rows)
+            {
+                if (row.Cells["SizeId"].Value != null && row.Cells["ColorId"].Value != null)
+                {
+                    int existingSize = Convert.ToInt32(row.Cells["SizeId"].Value);
+                    int existingColor = Convert.ToInt32(row.Cells["ColorId"].Value);
+
+                    if (existingSize == sizeId && existingColor == colorId)
+                    {
+                        MessageBox.Show("Biến thể (Size + Màu) này đã tồn tại!\nVui lòng sửa sản phẩm.",
+                            "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+            }
+
             var variant = new ProductVariant
             {
                 ProductId = _currentProductId,
-                SizeId = Convert.ToInt32(cmbSize.SelectedValue),
-                ColorId = Convert.ToInt32(cmbMau.SelectedValue),
+                SizeId = sizeId,
+                ColorId = colorId,
                 Quantity = int.Parse(txtSoLuong.Text)
             };
 
