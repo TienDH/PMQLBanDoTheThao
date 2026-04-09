@@ -31,7 +31,7 @@ namespace PMQLBanDoTheThao.DataBase
             }
         }
 
-       
+
         public static DataTable GetDataTable(string sql, SqlParameter[] pa = null)
         {
             using (SqlConnection conn = GetDBConnection())

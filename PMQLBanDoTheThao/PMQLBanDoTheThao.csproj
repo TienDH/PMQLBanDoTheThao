@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\QuanLySanPhamController.cs" />
-    <Compile Include="DataBase\DBControlller.cs" />
+    <Compile Include="DataBase\DBConnection.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Color.cs" />
     <Compile Include="Model\Product.cs" />
