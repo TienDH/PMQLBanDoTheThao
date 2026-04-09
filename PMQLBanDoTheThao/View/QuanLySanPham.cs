@@ -502,5 +502,155 @@ namespace PMQLBanDoTheThao.View
 
             FormatDataGrid();
         }
+
+        private void dgvSanPham_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void timerTimKiem_Tick_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSua_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTimKiem_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnTimKiem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLamMoi_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnXoa_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBienThe_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnThem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtHinhAnh_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtGiaBan_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbDanhMuc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTenSanPham_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnChonHinh_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupThongTin_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnXoaBienThe_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSuaBienThe_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnThemBienThe_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSoLuong_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbMau_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvBienThe_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
     }
 }
