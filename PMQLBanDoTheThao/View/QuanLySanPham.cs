@@ -26,6 +26,7 @@ namespace PMQLBanDoTheThao.View
             dgvSanPham.CellClick += dgvSanPham_CellClick;
             dgvSanPham.CellFormatting += dgvSanPham_CellFormatting;
             dgvBienThe.CellClick += dgvBienThe_CellClick;
+            txtTimKiem.TextChanged += txtTimKiem_TextChanged;
             //btnSuaBienThe.Click += btnSuaBienThe_Click;
             //btnXoaBienThe.Click += btnXoaBienThe_Click;
         }
@@ -266,9 +267,10 @@ namespace PMQLBanDoTheThao.View
                 dgvBienThe.Columns["ProductId"].Visible = false;
             }
 
-            // GỢI Ý THÊM: 
-            // Nhìn ảnh bạn gửi, bạn có cả SizeId, SizeName, ColorId, ColorName.
-            // Đã có Tên rồi thì bạn nên ẩn luôn cả ID của Size và Màu sắc đi cho bảng cực gọn:
+            if(dgvBienThe.Columns["Id"] != null)
+            {
+                dgvBienThe.Columns["Id"].Visible = false;
+            }
             if (dgvBienThe.Columns["SizeId"] != null)
             {
                 dgvBienThe.Columns["SizeId"].Visible = false;
@@ -438,9 +440,20 @@ namespace PMQLBanDoTheThao.View
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            string keyword = txtTenSanPham.Text.Trim();
+            timerTimKiem.Stop();
+            string keyword = txtTimKiem.Text.Trim();   
 
-            dgvSanPham.DataSource = _controller.SearchProducts(keyword);
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                
+                dgvSanPham.DataSource = _controller.GetAllProducts();
+            }
+            else
+            {
+                dgvSanPham.DataSource = _controller.SearchProducts(keyword);
+            }
+
+            FormatDataGrid();   // Format lại cột sau khi bind
         }
 
         private void btnLamMoi_Click(object sender, EventArgs e)
@@ -465,6 +478,29 @@ namespace PMQLBanDoTheThao.View
             LoadDataGrid();
 
             MessageBox.Show("Đã làm mới!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            timerTimKiem.Stop();
+            timerTimKiem.Start();        // Reset timer mỗi khi gõ
+        }
+
+        private void timerTimKiem_Tick(object sender, EventArgs e)
+        {
+            timerTimKiem.Stop();         // Dừng timer để tránh gọi nhiều lần
+
+            string keyword = txtTimKiem.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                dgvSanPham.DataSource = _controller.GetAllProducts();
+            }
+            else
+            {
+                dgvSanPham.DataSource = _controller.SearchProducts(keyword);
+            }
+
+            FormatDataGrid();
         }
     }
 }

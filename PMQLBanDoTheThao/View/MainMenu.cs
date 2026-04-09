@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PMQLBanDoTheThao.View;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,43 @@ namespace PMQLBanDoTheThao
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void LoadControl(UserControl uc)
+        {
+            panelMain.Controls.Clear();
+
+            uc.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(uc);
+        }
+
+        private void btnQuanLySanPham_Click(object sender, EventArgs e)
+        {
+            LoadControl(new QuanLySanPham());
+        }
+        private void btnQuanLyHoaDon_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void btnQuanLyKhachHang_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnQuanLyNhanVien_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnQuanLyKho_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnThongKeBaoCao_Click(object sender, EventArgs e)
         {
 
         }

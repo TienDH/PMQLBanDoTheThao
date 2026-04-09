@@ -11,6 +11,10 @@ namespace PMQLBanDoTheThao.View
 
         private void InitializeComponent()
         {
+            // Timer cho tìm kiếm realtime
+            this.timerTimKiem = new System.Windows.Forms.Timer();
+            this.timerTimKiem.Interval = 400;                    // Delay 400ms
+            this.timerTimKiem.Tick += new System.EventHandler(this.timerTimKiem_Tick);
             this.groupThongTin = new System.Windows.Forms.GroupBox();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btnTimKiem = new System.Windows.Forms.Button();
@@ -295,7 +299,7 @@ namespace PMQLBanDoTheThao.View
             // 
             // dgvSanPham
             // 
-            this.dgvSanPham.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvSanPham.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSanPham.ColumnHeadersHeight = 29;
             this.dgvSanPham.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvSanPham.Location = new System.Drawing.Point(0, 320);
@@ -374,5 +378,6 @@ namespace PMQLBanDoTheThao.View
         private Button btnSua;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private TextBox txtTimKiem;
+        private System.Windows.Forms.Timer timerTimKiem;
     }
 }
