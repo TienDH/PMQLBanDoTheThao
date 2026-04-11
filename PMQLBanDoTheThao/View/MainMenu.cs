@@ -132,6 +132,18 @@ namespace PMQLBanDoTheThao
 
         }
 
-        
+        private void LoadControl(UserControl uc)
+        {
+            panelMain.Controls.Clear();
+
+            uc.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(uc);
+        }
+        private void btnQuanLySanPham_Click(object sender, EventArgs e)
+        {
+            LoadControl(new QuanLySanPham());
+        }
+
+
     }
 }

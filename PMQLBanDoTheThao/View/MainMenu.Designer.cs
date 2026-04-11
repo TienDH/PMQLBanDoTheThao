@@ -39,10 +39,10 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.btnDangNhap = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.zToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelMain = new System.Windows.Forms.Panel();
-            this.btnDangNhap = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panelTop.SuspendLayout();
@@ -178,6 +178,18 @@
             this.panelTop.Size = new System.Drawing.Size(1428, 68);
             this.panelTop.TabIndex = 1;
             // 
+            // btnDangNhap
+            // 
+            this.btnDangNhap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDangNhap.Location = new System.Drawing.Point(1271, 0);
+            this.btnDangNhap.Name = "btnDangNhap";
+            this.btnDangNhap.Size = new System.Drawing.Size(145, 68);
+            this.btnDangNhap.TabIndex = 0;
+            this.btnDangNhap.Text = "Đăng nhập";
+            this.btnDangNhap.UseVisualStyleBackColor = true;
+            this.btnDangNhap.Click += new System.EventHandler(this.btnDangNhap_Click_1);
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -202,18 +214,6 @@
             this.panelMain.TabIndex = 2;
             this.panelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMain_Paint);
             // 
-            // btnDangNhap
-            // 
-            this.btnDangNhap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDangNhap.Location = new System.Drawing.Point(1271, 0);
-            this.btnDangNhap.Name = "btnDangNhap";
-            this.btnDangNhap.Size = new System.Drawing.Size(145, 68);
-            this.btnDangNhap.TabIndex = 0;
-            this.btnDangNhap.Text = "Đăng nhập";
-            this.btnDangNhap.UseVisualStyleBackColor = true;
-            this.btnDangNhap.Click += new System.EventHandler(this.btnDangNhap_Click_1);
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -227,6 +227,7 @@
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainMenu_Load);
+            this.Click += new System.EventHandler(this.btnQuanLySanPham_Click);
             this.panelLeft.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
