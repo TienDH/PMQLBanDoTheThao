@@ -8,43 +8,51 @@ using System.Threading.Tasks;
 
 namespace PMQLBanDoTheThao.DataBase
 {
-    public class DBConnection
+    internal class DBConnection
     {
-        private static readonly string strcon = @"Data Source=localhost\MSSQLSERVER01;Initial Catalog=QL_BanHang;Integrated Security=True";
+
+        private static string strcon = @"Data Source=.;Initial Catalog=QL_BanHang;Integrated Security=True";
 
         public static SqlConnection GetDBConnection()
         {
+            // Sửa lại biến truyền vào là strcon
             return new SqlConnection(strcon);
         }
 
-        //hàm thực thi SQL => ExecuteNonQuery
+        // Hàm thực thi SQL (Thêm, Xóa, Sửa)
         public static int ExecuteNonQuery(string sql, SqlParameter[] pa = null)
         {
             using (SqlConnection conn = GetDBConnection())
-            using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
-                conn.Open();
-                if (pa != null)
-                    cmd.Parameters.AddRange(pa);
-
-                return cmd.ExecuteNonQuery();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+                    if (pa != null)
+                        cmd.Parameters.AddRange(pa);
+                    return cmd.ExecuteNonQuery();
+                }
             }
         }
 
-
+        // Hàm trả về DataTable (Dùng cho hiển thị danh sách và tìm kiếm)
         public static DataTable GetDataTable(string sql, SqlParameter[] pa = null)
         {
             using (SqlConnection conn = GetDBConnection())
-            using (SqlCommand cmd = new SqlCommand(sql, conn))
-            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
             {
-                if (pa != null)
-                    cmd.Parameters.AddRange(pa);
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    // Quan trọng: Mở kết nối trước khi Fill dữ liệu
+                    conn.Open();
+                    if (pa != null)
+                        cmd.Parameters.AddRange(pa);
 
-                conn.Open();
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        return dt;
+                    }
+                }
             }
         }
     }
