@@ -6,14 +6,17 @@ namespace PMQLBanDoTheThao.Model
     {
         public int Id { get; set; }
         public string Username { get; set; }
-        // Password removed from public model to avoid keeping hashes in memory/session
         public string Role { get; set; }
+
+        // Các cột quyền mới (Tương ứng với các cột bit trong SQL)
+        public bool CanManageProduct { get; set; }
+        public bool CanManageInvoice { get; set; }
+        public bool CanSeeStatistic { get; set; }
+        public bool CanManageStaff { get; set; }
     }
 
-    // Lớp tĩnh để lưu Session (Trạng thái đăng nhập)
     public static class UserSession
     {
         public static User CurrentUser { get; set; }
     }
 }
-

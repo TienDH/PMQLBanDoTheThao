@@ -24,8 +24,7 @@ namespace PMQLBanDoTheThao.Controller
                 {
                     conn.Open();
                     // Chỉ lấy các cột chắc chắn có trong DB: Id, Username, Password, Role
-                    const string sql = "SELECT Id, Username, [Password], [Role] FROM [dbo].[User] WHERE Username = @user";
-
+                    const string sql = "SELECT Id, Username, [Password], [Role], CanManageProduct, CanManageInvoice, CanManageStaff, CanSeeStatistic FROM [dbo].[User] WHERE Username = @user";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
                         cmd.Parameters.Add("@user", SqlDbType.NVarChar, 256).Value = username.Trim();
@@ -55,8 +54,15 @@ namespace PMQLBanDoTheThao.Controller
                                 {
                                     Id = userId,
                                     Username = username.Trim(),
-                                    Role = role
+                                    Role = role,
+
+                                    // Lấy các giá trị BIT từ SQL và chuyển thành kiểu bool trong C#
+                                    CanManageProduct = reader["CanManageProduct"] != DBNull.Value && Convert.ToBoolean(reader["CanManageProduct"]),
+                                    CanManageInvoice = reader["CanManageInvoice"] != DBNull.Value && Convert.ToBoolean(reader["CanManageInvoice"]),
+                                    CanManageStaff = reader["CanManageStaff"] != DBNull.Value && Convert.ToBoolean(reader["CanManageStaff"]),
+                                    CanSeeStatistic = reader["CanSeeStatistic"] != DBNull.Value && Convert.ToBoolean(reader["CanSeeStatistic"])
                                 };
+                                return true;
                                 return true;
                             }
                             return false;
