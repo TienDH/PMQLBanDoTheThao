@@ -38,7 +38,7 @@ namespace PMQLBanDoTheThao
             btnDangXuat.Click += BtnDangXuat_Click;
 
             // Thêm vào panel2 (panel chứa các nút trên cùng)
-            panel2.Controls.Add(btnDangXuat);
+            panelTop.Controls.Add(btnDangXuat);
             btnDangXuat.BringToFront();
         }
 
@@ -65,11 +65,10 @@ namespace PMQLBanDoTheThao
             ApplyRolePermissions(role);
         }
 
-        // Sự kiện bấm nút Đăng Nhập (đã được Designer gán)
-        private void btnDangNhap_Click(object sender, EventArgs e)
+        private void btnDangNhap_Click_1(object sender, EventArgs e)
         {
             // Mở form login modal và truyền owner là MainMenu (this)
-            using (var loginForm = new login())
+            using (var loginForm = new Login())
             {
                 loginForm.ShowDialog(this);
             }
@@ -119,7 +118,7 @@ namespace PMQLBanDoTheThao
             UpdateAuthButtons();
 
             // Mở lại login modal để người dùng có thể đăng nhập lại
-            using (var loginForm = new login())
+            using (var loginForm = new Login())
             {
                 loginForm.ShowDialog(this);
             }
@@ -127,5 +126,12 @@ namespace PMQLBanDoTheThao
             // Cập nhật UI lần nữa sau khi login lại
             UpdateAuthButtons();
         }
+
+        private void panelMain_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        
     }
 }
