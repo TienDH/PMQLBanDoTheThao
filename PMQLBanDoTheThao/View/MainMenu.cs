@@ -88,15 +88,14 @@ namespace PMQLBanDoTheThao
 
         private void SetAdminOnlyVisibilityRecursively(Control.ControlCollection controls, bool visibleForAdmin)
         {
-            foreach (Control ctl in controls.Cast<Control>().ToList())
+            foreach (Control ctl in controls)
             {
-                // Nếu control có Tag = "AdminOnly" thì chỉ hiển thị khi isAdmin = true
-                if (ctl.Tag != null && string.Equals(ctl.Tag.ToString(), "AdminOnly", StringComparison.OrdinalIgnoreCase))
+                if (ctl.Tag != null && ctl.Tag.ToString().Contains("AdminOnly"))
                 {
+                    // Chỉ hiện nếu là Admin thực sự
                     ctl.Visible = visibleForAdmin;
                 }
 
-                // Nếu control chứa con thì đệ quy
                 if (ctl.HasChildren)
                 {
                     SetAdminOnlyVisibilityRecursively(ctl.Controls, visibleForAdmin);

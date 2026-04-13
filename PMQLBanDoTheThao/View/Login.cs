@@ -12,7 +12,7 @@ namespace PMQLBanDoTheThao.View
             InitializeComponent();
         }
 
-        private void login_Load(object sender, EventArgs e)
+        private void login_Load_1(object sender, EventArgs e)
         {
             txtUserName.Focus();
         }
@@ -64,12 +64,7 @@ namespace PMQLBanDoTheThao.View
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            // Xác nhận trước khi thoát
-            DialogResult dr = MessageBox.Show("Bạn có chắc chắn muốn thoát ứng dụng?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            this.Close();
         }
 
         // Hỗ trợ nhấn Enter để đăng nhập nhanh
@@ -82,5 +77,7 @@ namespace PMQLBanDoTheThao.View
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+        
     }
 }
