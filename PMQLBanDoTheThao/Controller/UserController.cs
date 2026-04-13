@@ -23,7 +23,6 @@ namespace PMQLBanDoTheThao.Controller
                 using (SqlConnection conn = DBConnection.GetDBConnection())
                 {
                     conn.Open();
-                    // SQL gọn gàng, chỉ lấy những gì cần dùng
                     const string sql = "SELECT Id, Username, [Password], [Role] FROM [dbo].[User] WHERE Username = @user";
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -58,7 +57,6 @@ namespace PMQLBanDoTheThao.Controller
                                     Role = role
                                 };
                                 return true;
-                                // Đã xóa 1 dòng "return true" dư thừa của bạn
                             }
                         }
                     }
@@ -83,7 +81,6 @@ namespace PMQLBanDoTheThao.Controller
                     conn.Open();
                     string hash = BCrypt.Net.BCrypt.HashPassword(plainPassword, BcryptWorkFactor);
 
-                    // Insert gọn gàng vào 3 cột còn lại
                     const string insertSql = "INSERT INTO [dbo].[User] (Username, [Password], [Role]) VALUES (@user, @pass, @role)";
                     using (SqlCommand cmd = new SqlCommand(insertSql, conn))
                     {
@@ -98,6 +95,6 @@ namespace PMQLBanDoTheThao.Controller
             catch { return false; }
         }
 
-        // Các hàm GetAllUsers, UpdateRole, DeleteUser của bạn đã rất chuẩn rồi, có thể giữ nguyên.
+        
     }
 }

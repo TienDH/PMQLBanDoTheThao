@@ -47,7 +47,7 @@ namespace PMQLBanDoTheThao.View
                 }
                 else
                 {
-                    // Nếu Login là form khởi chạy đầu tiên của ứng dụng
+                    
                     this.Hide();
                     MainMenu main = new MainMenu();
                     main.ShowDialog();
@@ -79,6 +79,6 @@ namespace PMQLBanDoTheThao.View
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        
+       
     }
 }

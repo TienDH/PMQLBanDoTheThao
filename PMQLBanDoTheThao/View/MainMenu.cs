@@ -149,15 +149,13 @@ namespace PMQLBanDoTheThao
             if (UserSession.CurrentUser == null)
             {
                 MessageBox.Show("Vui lòng đăng nhập để sử dụng chức năng này!", "Yêu cầu đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                using (var loginForm = new Login()) // "Login" là tên Form đăng nhập của bạn
+                using (var loginForm = new Login()) 
                 {
                     loginForm.ShowDialog(this);
                 }
 
                 // Sau khi đóng Form Login, kiểm tra xem đã đăng nhập thành công chưa
                 if (UserSession.CurrentUser == null) return false;
-
-                // Nếu vừa đăng nhập xong, cập nhật lại các nút trên giao diện chính
                 UpdateAuthButtons();
             }
 
