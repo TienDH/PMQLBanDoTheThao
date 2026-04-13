@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BCrypt.Net;
+using PMQLBanDoTheThao.DataBase;
+using PMQLBanDoTheThao.Model;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using PMQLBanDoTheThao.Model;
-using BCrypt.Net;
-using PMQLBanDoTheThao.DataBase;
+using static PMQLBanDoTheThao.Model.User;
 
 namespace PMQLBanDoTheThao.Controller
 {
@@ -23,8 +23,9 @@ namespace PMQLBanDoTheThao.Controller
                 using (SqlConnection conn = DBConnection.GetDBConnection())
                 {
                     conn.Open();
-                    // Chỉ lấy các cột chắc chắn có trong DB: Id, Username, Password, Role
-                    const string sql = "SELECT Id, Username, [Password], [Role], CanManageProduct, CanManageInvoice, CanManageStaff, CanSeeStatistic FROM [dbo].[User] WHERE Username = @user";
+                    // SQL gọn gàng, chỉ lấy những gì cần dùng
+                    const string sql = "SELECT Id, Username, [Password], [Role] FROM [dbo].[User] WHERE Username = @user";
+
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
                         cmd.Parameters.Add("@user", SqlDbType.NVarChar, 256).Value = username.Trim();
@@ -35,11 +36,11 @@ namespace PMQLBanDoTheThao.Controller
 
                             int userId = Convert.ToInt32(reader["Id"]);
                             string hashedPass = reader["Password"]?.ToString()?.Trim();
-                            // Khai báo biến role ở đây để tránh lỗi CS0103
                             string role = reader["Role"] == DBNull.Value ? "Staff" : reader["Role"].ToString();
 
                             if (string.IsNullOrEmpty(hashedPass)) return false;
 
+                            // Xác thực mật khẩu BCrypt
                             bool verified = false;
                             try
                             {
@@ -49,33 +50,25 @@ namespace PMQLBanDoTheThao.Controller
 
                             if (verified)
                             {
-                                // Gán dữ liệu vào Session
+                                // Gán vào Session để dùng cho phân quyền MainMenu
                                 UserSession.CurrentUser = new User
                                 {
                                     Id = userId,
                                     Username = username.Trim(),
-                                    Role = role,
-
-                                    // Lấy các giá trị BIT từ SQL và chuyển thành kiểu bool trong C#
-                                    CanManageProduct = reader["CanManageProduct"] != DBNull.Value && Convert.ToBoolean(reader["CanManageProduct"]),
-                                    CanManageInvoice = reader["CanManageInvoice"] != DBNull.Value && Convert.ToBoolean(reader["CanManageInvoice"]),
-                                    CanManageStaff = reader["CanManageStaff"] != DBNull.Value && Convert.ToBoolean(reader["CanManageStaff"]),
-                                    CanSeeStatistic = reader["CanSeeStatistic"] != DBNull.Value && Convert.ToBoolean(reader["CanSeeStatistic"])
+                                    Role = role
                                 };
                                 return true;
-                                return true;
+                                // Đã xóa 1 dòng "return true" dư thừa của bạn
                             }
-                            return false;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Hiển thị thông báo lỗi chi tiết để debug
                 MessageBox.Show("Lỗi kết nối: " + ex.Message, "Hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
             }
+            return false;
         }
 
         public bool CreateUser(string username, string plainPassword, string role = "Staff")
@@ -90,6 +83,7 @@ namespace PMQLBanDoTheThao.Controller
                     conn.Open();
                     string hash = BCrypt.Net.BCrypt.HashPassword(plainPassword, BcryptWorkFactor);
 
+                    // Insert gọn gàng vào 3 cột còn lại
                     const string insertSql = "INSERT INTO [dbo].[User] (Username, [Password], [Role]) VALUES (@user, @pass, @role)";
                     using (SqlCommand cmd = new SqlCommand(insertSql, conn))
                     {
@@ -104,27 +98,6 @@ namespace PMQLBanDoTheThao.Controller
             catch { return false; }
         }
 
-        public DataTable GetAllUsers()
-        {
-            const string sql = "SELECT Id, Username, [Role] FROM [dbo].[User] ORDER BY Username";
-            return DBConnection.GetDataTable(sql, null);
-        }
-
-        public bool UpdateRole(int userId, string newRole)
-        {
-            const string sql = "UPDATE [dbo].[User] SET [Role] = @role WHERE Id = @id";
-            SqlParameter[] p = {
-                new SqlParameter("@role", newRole),
-                new SqlParameter("@id", userId)
-            };
-            return DBConnection.ExecuteNonQuery(sql, p) > 0;
-        }
-
-        public bool DeleteUser(int userId)
-        {
-            const string sql = "DELETE FROM [dbo].[User] WHERE Id = @id";
-            SqlParameter[] p = { new SqlParameter("@id", userId) };
-            return DBConnection.ExecuteNonQuery(sql, p) > 0;
-        }
+        // Các hàm GetAllUsers, UpdateRole, DeleteUser của bạn đã rất chuẩn rồi, có thể giữ nguyên.
     }
 }

@@ -2,6 +2,7 @@
 using PMQLBanDoTheThao.Model;
 using System;
 using System.Windows.Forms;
+using static PMQLBanDoTheThao.Model.User;
 
 namespace PMQLBanDoTheThao.View
 {
@@ -12,7 +13,7 @@ namespace PMQLBanDoTheThao.View
             InitializeComponent();
         }
 
-        private void login_Load_1(object sender, EventArgs e)
+        private void login_Load(object sender, EventArgs e)
         {
             txtUserName.Focus();
         }
