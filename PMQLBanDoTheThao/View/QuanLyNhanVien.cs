@@ -31,7 +31,12 @@ namespace PMQLBanDoTheThao.View
                 dgvNhanVien.Columns["Username"].HeaderText = "Tên đăng nhập";
                 dgvNhanVien.Columns["Role"].HeaderText = "Chức vụ";
 
-                // Tự động giãn các cột cho đẹp
+                // Nếu lấy cả Password về nhưng không muốn hiện dãy mã hóa lên bảng
+                if (dgvNhanVien.Columns.Contains("Password"))
+                {
+                    dgvNhanVien.Columns["Password"].Visible = false;
+                }
+
                 dgvNhanVien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
         }
@@ -41,24 +46,16 @@ namespace PMQLBanDoTheThao.View
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvNhanVien.Rows[e.RowIndex];
-
-                // 1. Đổ dữ liệu vào TextBox (Dùng .Trim() để tránh lỗi khoảng trắng)
                 txtUsername.Text = row.Cells["Username"].Value.ToString().Trim();
-                txtPassword.Text = ""; // Không hiện pass cũ vì bảo mật
 
-                // 2. Đổ dữ liệu vào ComboBox Chức vụ
-                // Dùng thuộc tính .Text sẽ tìm giá trị khớp trong Items của ComboBox
-                string roleValue = row.Cells["Role"].Value.ToString().Trim();
-                cboRole.Text = roleValue;
+                // Đổ mật khẩu mã hóa vào ô TextBox nếu cần
+                if (dgvNhanVien.Columns.Contains("Password") && row.Cells["Password"].Value != null)
+                {
+                    txtPassword.Text = row.Cells["Password"].Value.ToString();
+                }
 
-                // 3. Đổ dữ liệu vào các CheckBox quyền
-                chkSanPham.Checked = row.Cells["CanManageProduct"].Value.ToString().ToLower() == "true" || row.Cells["CanManageProduct"].Value.ToString() == "1";
-                chkHoaDon.Checked = row.Cells["CanManageInvoice"].Value.ToString().ToLower() == "true" || row.Cells["CanManageInvoice"].Value.ToString() == "1";
-                chkNhanVien.Checked = row.Cells["CanManageStaff"].Value.ToString().ToLower() == "true" || row.Cells["CanManageStaff"].Value.ToString() == "1";
-                chkThongKe.Checked = row.Cells["CanSeeStatistic"].Value.ToString().ToLower() == "true" || row.Cells["CanSeeStatistic"].Value.ToString() == "1";
-
-                // Khóa ô Username khi sửa
-                txtUsername.Enabled = false;
+                cboRole.Text = row.Cells["Role"].Value.ToString().Trim();
+                txtUsername.Enabled = false; // Không cho sửa Username
             }
         }
 
@@ -70,14 +67,11 @@ namespace PMQLBanDoTheThao.View
                 return;
             }
 
+            // Gọi hàm AddUser mới (Chỉ còn 3 tham số)
             bool success = nvController.AddUser(
                 txtUsername.Text.Trim(),
                 txtPassword.Text,
-                cboRole.Text,
-                chkSanPham.Checked,
-                chkHoaDon.Checked,
-                chkNhanVien.Checked,
-                chkThongKe.Checked
+                cboRole.Text
             );
 
             if (success)
@@ -92,18 +86,13 @@ namespace PMQLBanDoTheThao.View
             if (dgvNhanVien.CurrentRow == null) return;
 
             int id = Convert.ToInt32(dgvNhanVien.CurrentRow.Cells["Id"].Value);
-            bool success = nvController.UpdateUser(
-                id,
-                cboRole.Text,
-                chkSanPham.Checked,
-                chkHoaDon.Checked,
-                chkNhanVien.Checked,
-                chkThongKe.Checked
-            );
+
+            // Gọi hàm UpdateUser mới (Chỉ còn 2 tham số: id và role)
+            bool success = nvController.UpdateUser(id, cboRole.Text);
 
             if (success)
             {
-                MessageBox.Show("Cập nhật quyền thành công!");
+                MessageBox.Show("Cập nhật chức vụ thành công!");
                 LoadData();
             }
         }
@@ -137,11 +126,7 @@ namespace PMQLBanDoTheThao.View
 
             if (cboRole.Items.Count > 0) cboRole.SelectedIndex = 0;
 
-            chkSanPham.Checked = false;
-            chkHoaDon.Checked = false;
-            chkNhanVien.Checked = false;
-            chkThongKe.Checked = false;
-
+            // Đã xóa phần Clear CheckBox vì không còn dùng tới
             LoadData();
         }
     }
