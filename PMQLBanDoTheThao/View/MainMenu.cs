@@ -37,7 +37,6 @@ namespace PMQLBanDoTheThao
             };
             btnDangXuat.Click += BtnDangXuat_Click;
 
-            // Thêm vào panel2 (panel chứa các nút trên cùng)
             panelTop.Controls.Add(btnDangXuat);
             btnDangXuat.BringToFront();
         }
@@ -95,9 +94,7 @@ namespace PMQLBanDoTheThao
 
             BtnQuanLyKho.Enabled = true;
             BtnQuanLyKho.Visible = true;
-
-            // Riêng nút Nhân viên và Thống kê có thể ẩn hẳn nếu chưa đăng nhập 
-            // hoặc cứ để hiện rồi báo lỗi sau tùy bạn. Ở đây mình để hiện luôn:
+           
             btnQuanLyNhanVien.Visible = true;
             btnQuanLyNhanVien.Enabled = true;
 
@@ -132,7 +129,6 @@ namespace PMQLBanDoTheThao
 
             // Xóa session
             UserSession.CurrentUser = null;
-
             panelMain.Controls.Clear();
             // Cập nhật UI (ẩn các control AdminOnly)
             UpdateAuthButtons();
