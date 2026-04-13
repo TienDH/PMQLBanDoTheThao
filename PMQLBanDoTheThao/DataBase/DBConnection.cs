@@ -10,9 +10,7 @@ namespace PMQLBanDoTheThao.DataBase
 {
     public class DBConnection
     {
-        private static readonly string strcon = @"Data Source=localhost\MSSQLSERVER01;Initial Catalog=QL_BanHang;Integrated Security=True";
-
-        public static SqlConnection GetDBConnection()
+        private static readonly string strcon = @"Server=localhost;Database=Ql_BanHang;Integrated Security=True;"; public static SqlConnection GetDBConnection()
         {
             return new SqlConnection(strcon);
         }
