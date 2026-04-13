@@ -77,8 +77,10 @@
             this.btnThongKeBaoCao.Name = "btnThongKeBaoCao";
             this.btnThongKeBaoCao.Size = new System.Drawing.Size(189, 54);
             this.btnThongKeBaoCao.TabIndex = 9;
+            this.btnThongKeBaoCao.Tag = "AdminOnly";
             this.btnThongKeBaoCao.Text = "Thống Kê Báo Cáo";
             this.btnThongKeBaoCao.UseVisualStyleBackColor = true;
+            this.btnThongKeBaoCao.Click += new System.EventHandler(this.btnThongKeBaoCao_Click);
             // 
             // BtnQuanLyKho
             // 
@@ -92,6 +94,7 @@
             this.BtnQuanLyKho.Tag = "AdminOnly";
             this.BtnQuanLyKho.Text = "Quản Lý Kho";
             this.BtnQuanLyKho.UseVisualStyleBackColor = true;
+            this.BtnQuanLyKho.Click += new System.EventHandler(this.BtnQuanLyKho_Click);
             // 
             // btnQuanLyNhanVien
             // 
@@ -105,6 +108,7 @@
             this.btnQuanLyNhanVien.Tag = "AdminOnly";
             this.btnQuanLyNhanVien.Text = "Quản Lý Nhân Viên";
             this.btnQuanLyNhanVien.UseVisualStyleBackColor = true;
+            this.btnQuanLyNhanVien.Click += new System.EventHandler(this.btnQuanLyNhanVien_Click);
             // 
             // btnQuanLyKhachHang
             // 
@@ -118,6 +122,7 @@
             this.btnQuanLyKhachHang.Tag = "AdminOnly";
             this.btnQuanLyKhachHang.Text = "Quản Lý Khách Hàng";
             this.btnQuanLyKhachHang.UseVisualStyleBackColor = true;
+            this.btnQuanLyKhachHang.Click += new System.EventHandler(this.btnQuanLyKhachHang_Click);
             // 
             // btnQuanLyHoaDon
             // 
@@ -128,9 +133,10 @@
             this.btnQuanLyHoaDon.Name = "btnQuanLyHoaDon";
             this.btnQuanLyHoaDon.Size = new System.Drawing.Size(189, 54);
             this.btnQuanLyHoaDon.TabIndex = 3;
-            this.btnQuanLyHoaDon.Tag = "AdminOnly";
+            this.btnQuanLyHoaDon.Tag = "";
             this.btnQuanLyHoaDon.Text = "Quản Lý Hóa Đơn";
             this.btnQuanLyHoaDon.UseVisualStyleBackColor = true;
+            this.btnQuanLyHoaDon.Click += new System.EventHandler(this.btnQuanLyHoaDon_Click);
             // 
             // btnQuanLySanPham
             // 
@@ -144,6 +150,7 @@
             this.btnQuanLySanPham.Tag = "AdminOnly";
             this.btnQuanLySanPham.Text = "Quản Lý Sản Phẩm";
             this.btnQuanLySanPham.UseVisualStyleBackColor = true;
+            this.btnQuanLySanPham.Click += new System.EventHandler(this.btnQuanLySanPham_Click_1);
             // 
             // panel3
             // 
@@ -232,7 +239,6 @@
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainMenu_Load);
-            this.Click += new System.EventHandler(this.btnQuanLySanPham_Click);
             this.panelLeft.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

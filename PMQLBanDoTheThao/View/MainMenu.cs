@@ -62,7 +62,7 @@ namespace PMQLBanDoTheThao
 
             // Áp quyền hiển thị control theo role
             string role = loggedIn ? (UserSession.CurrentUser.Role ?? string.Empty) : string.Empty;
-            ApplyRolePermissions(role);
+            ApplyRolePermissions();
         }
 
         private void btnDangNhap_Click_1(object sender, EventArgs e)
@@ -78,13 +78,33 @@ namespace PMQLBanDoTheThao
         }
 
         // Áp phân quyền: ẩn/hiện các control có Tag="AdminOnly" nếu không phải Admin
-        private void ApplyRolePermissions(string role)
+        public void ApplyRolePermissions()
         {
-            bool isAdmin = !string.IsNullOrWhiteSpace(role) && role.Equals("Admin", StringComparison.OrdinalIgnoreCase);
 
-            // Duyệt đệ quy mọi control trong form
-            SetAdminOnlyVisibilityRecursively(this.Controls, isAdmin);
+            var user = UserSession.CurrentUser;
+
+            // Cho tất cả các nút hiện lên và sáng lên để có thể click được
+            btnQuanLyHoaDon.Visible = true;
+            btnQuanLyHoaDon.Enabled = true;
+
+            btnQuanLySanPham.Visible = true;
+            btnQuanLySanPham.Enabled = true;
+
+            btnQuanLyKhachHang.Visible = true;
+            btnQuanLyKhachHang.Enabled = true;
+
+            BtnQuanLyKho.Enabled = true;
+            BtnQuanLyKho.Visible = true;
+
+            // Riêng nút Nhân viên và Thống kê có thể ẩn hẳn nếu chưa đăng nhập 
+            // hoặc cứ để hiện rồi báo lỗi sau tùy bạn. Ở đây mình để hiện luôn:
+            btnQuanLyNhanVien.Visible = true;
+            btnQuanLyNhanVien.Enabled = true;
+
+            btnThongKeBaoCao.Visible = true;
+            btnThongKeBaoCao.Enabled = true;
         }
+
 
         private void SetAdminOnlyVisibilityRecursively(Control.ControlCollection controls, bool visibleForAdmin)
         {
@@ -113,6 +133,7 @@ namespace PMQLBanDoTheThao
             // Xóa session
             UserSession.CurrentUser = null;
 
+            panelMain.Controls.Clear();
             // Cập nhật UI (ẩn các control AdminOnly)
             UpdateAuthButtons();
 
@@ -124,6 +145,34 @@ namespace PMQLBanDoTheThao
 
             // Cập nhật UI lần nữa sau khi login lại
             UpdateAuthButtons();
+        }
+
+        //hàm check đăng nhập//
+        private bool CheckPermission(string requiredRole = "")
+        {
+            if (UserSession.CurrentUser == null)
+            {
+                MessageBox.Show("Vui lòng đăng nhập để sử dụng chức năng này!", "Yêu cầu đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                using (var loginForm = new Login()) // "Login" là tên Form đăng nhập của bạn
+                {
+                    loginForm.ShowDialog(this);
+                }
+
+                // Sau khi đóng Form Login, kiểm tra xem đã đăng nhập thành công chưa
+                if (UserSession.CurrentUser == null) return false;
+
+                // Nếu vừa đăng nhập xong, cập nhật lại các nút trên giao diện chính
+                UpdateAuthButtons();
+            }
+
+            // 2. Kiểm tra quyền Admin (nếu chức năng đó yêu cầu Admin)
+            if (!string.IsNullOrEmpty(requiredRole) && !UserSession.CurrentUser.Role.Equals(requiredRole, StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Bạn không đủ quyền để truy cập vào chức năng này!", "Từ chối truy cập", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return false;
+            }
+
+            return true;
         }
 
         private void panelMain_Paint(object sender, PaintEventArgs e)
@@ -138,11 +187,61 @@ namespace PMQLBanDoTheThao
             uc.Dock = DockStyle.Fill;
             panelMain.Controls.Add(uc);
         }
-        private void btnQuanLySanPham_Click(object sender, EventArgs e)
+        private void btnQuanLySanPham_Click_1(object sender, EventArgs e)
         {
-            LoadControl(new QuanLySanPham());
+            if (CheckPermission("Admin")) 
+            {
+                LoadControl(new QuanLySanPham());
+            }
         }
 
+        private void btnQuanLyHoaDon_Click(object sender, EventArgs e)
+        {
+            if (CheckPermission()) 
+            {
+                MessageBox.Show("Tính năng Quản lý khách hàng đang được phát triển!", "Thông báo");
 
+                // LoadControl(new QuanLyKhachHang())//
+            }
+        }
+
+        
+
+        private void btnQuanLyKhachHang_Click(object sender, EventArgs e)
+        {
+            if (CheckPermission("Admin"))
+            {
+                //LoadControl(new QuanLyKhachHang());
+                MessageBox.Show("Tính năng Quản lý khách hàng đang được phát triển!", "Thông báo");
+            }
+        }
+
+        private void btnQuanLyNhanVien_Click(object sender, EventArgs e)
+        {
+            if (CheckPermission("Admin"))
+            {
+                //LoadControl(new QuanLyNhanVien());
+                MessageBox.Show("Tính năng Quản lý nhân viên đang được phát triển!", "Thông báo");
+            }
+        }
+
+        private void BtnQuanLyKho_Click(object sender, EventArgs e)
+        {
+            if (CheckPermission("Admin"))
+            {
+                //LoadControl(new QuanLyKho());
+                MessageBox.Show("Tính năng Quản lý kho đang được phát triển!", "Thông báo");
+            }
+        }
+
+        private void btnThongKeBaoCao_Click(object sender, EventArgs e)
+        {
+            if (CheckPermission("Admin")) { 
+                //LoadControl(new ThongKeBaoCao());
+                MessageBox.Show("Tính năng Thống kê báo cáo đang được phát triển!", "Thông báo");
+            }
+        }
+
+        
     }
 }
