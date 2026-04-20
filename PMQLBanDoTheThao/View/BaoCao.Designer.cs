@@ -35,6 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dtpDenNgay = new System.Windows.Forms.DateTimePicker();
             this.lblTongDoanhThu = new System.Windows.Forms.Label();
+            this.btnXuatExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBaoCao)).BeginInit();
             this.SuspendLayout();
             // 
@@ -104,11 +105,22 @@
             this.lblTongDoanhThu.TabIndex = 6;
             this.lblTongDoanhThu.Text = "Tổng Doanh thu";
             // 
+            // btnXuatExcel
+            // 
+            this.btnXuatExcel.Location = new System.Drawing.Point(660, 12);
+            this.btnXuatExcel.Name = "btnXuatExcel";
+            this.btnXuatExcel.Size = new System.Drawing.Size(87, 47);
+            this.btnXuatExcel.TabIndex = 7;
+            this.btnXuatExcel.Text = "Xuất File (Excel)";
+            this.btnXuatExcel.UseVisualStyleBackColor = true;
+            this.btnXuatExcel.Click += new System.EventHandler(this.btnXuatExcel_Click);
+            // 
             // BaoCao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnXuatExcel);
             this.Controls.Add(this.lblTongDoanhThu);
             this.Controls.Add(this.dtpDenNgay);
             this.Controls.Add(this.label2);
@@ -133,5 +145,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpDenNgay;
         private System.Windows.Forms.Label lblTongDoanhThu;
+        private System.Windows.Forms.Button btnXuatExcel;
     }
 }

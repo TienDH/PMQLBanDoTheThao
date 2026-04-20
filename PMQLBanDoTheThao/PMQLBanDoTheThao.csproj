@@ -47,10 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\BaoCaoController.cs" />
     <Compile Include="Controller\QuanLySanPhamController.cs" />
+    <Compile Include="DataBase\BaoCaoDB.cs" />
     <Compile Include="DataBase\DBConnection.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Color.cs" />
+    <Compile Include="Model\DoanhThuReport.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductVariant.cs" />
     <Compile Include="Model\Size.cs" />
@@ -58,6 +61,20 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="QL_BanHangDataSet.cs">
+      <DependentUpon>QL_BanHangDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="QL_BanHangDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QL_BanHangDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="View\BaoCao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BaoCao.Designer.cs">
+      <DependentUpon>BaoCao.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MainMenu.cs">
       <SubType>Form</SubType>
@@ -73,6 +90,9 @@
     <Compile Include="View\QuanLySanPham.Designer.cs">
       <DependentUpon>QuanLySanPham.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\BaoCao.resx">
+      <DependentUpon>BaoCao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -93,6 +113,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="QL_BanHangDataSet.xsc">
+      <DependentUpon>QL_BanHangDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="QL_BanHangDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QL_BanHangDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="QL_BanHangDataSet.xss">
+      <DependentUpon>QL_BanHangDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -101,6 +132,35 @@
     <Content Include="Properties\Resources\logoLock.jpg" />
     <Content Include="Properties\Resources\logoMANAGER.png" />
     <Content Include="Properties\Resources\logoUser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
