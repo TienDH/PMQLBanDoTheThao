@@ -36,9 +36,13 @@ namespace PMQLBanDoTheThao
         }
         private void btnQuanLyHoaDon_Click(object sender, EventArgs e)
         {
-            
 
+
+            // Thêm dòng này vào để gọi UserControl Quản Lý Hóa Đơn
+            LoadControl(new QuanLyHoaDon()); // Viết hoa chữ L
         }
+
+        
 
         private void btnQuanLyKhachHang_Click(object sender, EventArgs e)
         {

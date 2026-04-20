@@ -10,14 +10,17 @@ namespace PMQLBanDoTheThao.DataBase
 {
     public class DBConnection
     {
-        private static readonly string strcon = @"Data Source=localhost\MSSQLSERVER01;Initial Catalog=QL_BanHang;Integrated Security=True";
+        // 1. Đổi thành public để Controller thấy được
+        // 2. Đổi tên thành ConnectionString cho khớp với code bạn đã viết ở Controller
+        // 3. Trỏ vào Database độc lập QL_HoaDon_Module
+        public static readonly string ConnectionString = @"Data Source=.\SQLEXPRESS01;Initial Catalog=QL_HoaDon_Module;Integrated Security=True;TrustServerCertificate=True";
 
         public static SqlConnection GetDBConnection()
         {
-            return new SqlConnection(strcon);
+            return new SqlConnection(ConnectionString);
         }
 
-        //hàm thực thi SQL => ExecuteNonQuery
+        // Hàm thực thi SQL (Insert, Update, Delete)
         public static int ExecuteNonQuery(string sql, SqlParameter[] pa = null)
         {
             using (SqlConnection conn = GetDBConnection())
@@ -31,7 +34,7 @@ namespace PMQLBanDoTheThao.DataBase
             }
         }
 
-
+        // Hàm lấy dữ liệu (Đổ vào ComboBox, DataGridView)
         public static DataTable GetDataTable(string sql, SqlParameter[] pa = null)
         {
             using (SqlConnection conn = GetDBConnection())
