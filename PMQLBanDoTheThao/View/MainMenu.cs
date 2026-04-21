@@ -236,6 +236,18 @@ namespace PMQLBanDoTheThao
             }
         }
 
+<<<<<<< HEAD
         
+=======
+        private void btnLoaiSP_Click(object sender, EventArgs e)
+        {
+            LoadControl(new QuanLyLoaiSanPham());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadControl(new QuanLyVoucher());
+        }
+>>>>>>> feature/ql-loai-sp
     }
 }

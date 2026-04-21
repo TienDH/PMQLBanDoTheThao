@@ -11,10 +11,8 @@ namespace PMQLBanDoTheThao.View
 
         private void InitializeComponent()
         {
-            // Timer cho tìm kiếm realtime
-            this.timerTimKiem = new System.Windows.Forms.Timer();
-            this.timerTimKiem.Interval = 400;                    // Delay 400ms
-            this.timerTimKiem.Tick += new System.EventHandler(this.timerTimKiem_Tick);
+            this.components = new System.ComponentModel.Container();
+            this.timerTimKiem = new System.Windows.Forms.Timer(this.components);
             this.groupThongTin = new System.Windows.Forms.GroupBox();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btnTimKiem = new System.Windows.Forms.Button();
@@ -50,6 +48,11 @@ namespace PMQLBanDoTheThao.View
             ((System.ComponentModel.ISupportInitialize)(this.dgvBienThe)).BeginInit();
             this.SuspendLayout();
             // 
+            // timerTimKiem
+            // 
+            this.timerTimKiem.Interval = 400;
+            this.timerTimKiem.Tick += new System.EventHandler(this.timerTimKiem_Tick_1);
+            // 
             // groupThongTin
             // 
             this.groupThongTin.Controls.Add(this.txtTimKiem);
@@ -74,6 +77,7 @@ namespace PMQLBanDoTheThao.View
             this.groupThongTin.TabIndex = 0;
             this.groupThongTin.TabStop = false;
             this.groupThongTin.Text = "Thông tin sản phẩm";
+            this.groupThongTin.Enter += new System.EventHandler(this.groupThongTin_Enter);
             // 
             // txtTimKiem
             // 
@@ -81,6 +85,7 @@ namespace PMQLBanDoTheThao.View
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(181, 22);
             this.txtTimKiem.TabIndex = 14;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged_1);
             // 
             // btnTimKiem
             // 
@@ -89,7 +94,7 @@ namespace PMQLBanDoTheThao.View
             this.btnTimKiem.Size = new System.Drawing.Size(114, 29);
             this.btnTimKiem.TabIndex = 13;
             this.btnTimKiem.Text = "Tìm Kiếm";
-            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click_1);
             // 
             // btnLamMoi
             // 
@@ -98,7 +103,7 @@ namespace PMQLBanDoTheThao.View
             this.btnLamMoi.Size = new System.Drawing.Size(114, 37);
             this.btnLamMoi.TabIndex = 0;
             this.btnLamMoi.Text = "Làm mới";
-            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click_1);
             // 
             // btnXoa
             // 
@@ -107,7 +112,7 @@ namespace PMQLBanDoTheThao.View
             this.btnXoa.Size = new System.Drawing.Size(114, 37);
             this.btnXoa.TabIndex = 1;
             this.btnXoa.Text = "Xóa";
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click_1);
             // 
             // btnSua
             // 
@@ -116,7 +121,7 @@ namespace PMQLBanDoTheThao.View
             this.btnSua.Size = new System.Drawing.Size(114, 37);
             this.btnSua.TabIndex = 2;
             this.btnSua.Text = "Sửa";
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click_1);
             // 
             // btnThem
             // 
@@ -125,7 +130,7 @@ namespace PMQLBanDoTheThao.View
             this.btnThem.Size = new System.Drawing.Size(114, 37);
             this.btnThem.TabIndex = 3;
             this.btnThem.Text = "Thêm";
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click_1);
             // 
             // txtHinhAnh
             // 
@@ -133,6 +138,7 @@ namespace PMQLBanDoTheThao.View
             this.txtHinhAnh.Name = "txtHinhAnh";
             this.txtHinhAnh.Size = new System.Drawing.Size(249, 22);
             this.txtHinhAnh.TabIndex = 4;
+            this.txtHinhAnh.TextChanged += new System.EventHandler(this.txtHinhAnh_TextChanged);
             // 
             // label4
             // 
@@ -142,6 +148,7 @@ namespace PMQLBanDoTheThao.View
             this.label4.Size = new System.Drawing.Size(62, 16);
             this.label4.TabIndex = 5;
             this.label4.Text = "Hình ảnh:";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // txtGiaBan
             // 
@@ -149,6 +156,7 @@ namespace PMQLBanDoTheThao.View
             this.txtGiaBan.Name = "txtGiaBan";
             this.txtGiaBan.Size = new System.Drawing.Size(171, 22);
             this.txtGiaBan.TabIndex = 6;
+            this.txtGiaBan.TextChanged += new System.EventHandler(this.txtGiaBan_TextChanged);
             // 
             // label3
             // 
@@ -158,6 +166,7 @@ namespace PMQLBanDoTheThao.View
             this.label3.Size = new System.Drawing.Size(57, 16);
             this.label3.TabIndex = 7;
             this.label3.Text = "Giá bán:";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // cmbDanhMuc
             // 
@@ -166,6 +175,7 @@ namespace PMQLBanDoTheThao.View
             this.cmbDanhMuc.Name = "cmbDanhMuc";
             this.cmbDanhMuc.Size = new System.Drawing.Size(399, 24);
             this.cmbDanhMuc.TabIndex = 8;
+            this.cmbDanhMuc.SelectedIndexChanged += new System.EventHandler(this.cmbDanhMuc_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -175,6 +185,7 @@ namespace PMQLBanDoTheThao.View
             this.label2.Size = new System.Drawing.Size(70, 16);
             this.label2.TabIndex = 9;
             this.label2.Text = "Danh mục:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtTenSanPham
             // 
@@ -182,6 +193,7 @@ namespace PMQLBanDoTheThao.View
             this.txtTenSanPham.Name = "txtTenSanPham";
             this.txtTenSanPham.Size = new System.Drawing.Size(399, 22);
             this.txtTenSanPham.TabIndex = 10;
+            this.txtTenSanPham.TextChanged += new System.EventHandler(this.txtTenSanPham_TextChanged);
             // 
             // label1
             // 
@@ -191,6 +203,7 @@ namespace PMQLBanDoTheThao.View
             this.label1.Size = new System.Drawing.Size(96, 16);
             this.label1.TabIndex = 11;
             this.label1.Text = "Tên sản phẩm:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnChonHinh
             // 
@@ -199,7 +212,7 @@ namespace PMQLBanDoTheThao.View
             this.btnChonHinh.Size = new System.Drawing.Size(103, 27);
             this.btnChonHinh.TabIndex = 12;
             this.btnChonHinh.Text = "Chọn Hình";
-            this.btnChonHinh.Click += new System.EventHandler(this.btnChonHinh_Click);
+            this.btnChonHinh.Click += new System.EventHandler(this.btnChonHinh_Click_1);
             // 
             // groupBienThe
             // 
@@ -219,6 +232,7 @@ namespace PMQLBanDoTheThao.View
             this.groupBienThe.TabIndex = 1;
             this.groupBienThe.TabStop = false;
             this.groupBienThe.Text = "Thêm biến thể (Size - Màu)";
+            this.groupBienThe.Enter += new System.EventHandler(this.groupBienThe_Enter);
             // 
             // btnXoaBienThe
             // 
@@ -227,7 +241,7 @@ namespace PMQLBanDoTheThao.View
             this.btnXoaBienThe.Size = new System.Drawing.Size(91, 32);
             this.btnXoaBienThe.TabIndex = 8;
             this.btnXoaBienThe.Text = "Xóa";
-            this.btnXoaBienThe.Click += new System.EventHandler(this.btnXoaBienThe_Click);
+            this.btnXoaBienThe.Click += new System.EventHandler(this.btnXoaBienThe_Click_1);
             // 
             // btnSuaBienThe
             // 
@@ -236,7 +250,7 @@ namespace PMQLBanDoTheThao.View
             this.btnSuaBienThe.Size = new System.Drawing.Size(91, 32);
             this.btnSuaBienThe.TabIndex = 7;
             this.btnSuaBienThe.Text = "Sửa";
-            this.btnSuaBienThe.Click += new System.EventHandler(this.btnSuaBienThe_Click);
+            this.btnSuaBienThe.Click += new System.EventHandler(this.btnSuaBienThe_Click_1);
             // 
             // btnThemBienThe
             // 
@@ -245,7 +259,7 @@ namespace PMQLBanDoTheThao.View
             this.btnThemBienThe.Size = new System.Drawing.Size(91, 32);
             this.btnThemBienThe.TabIndex = 0;
             this.btnThemBienThe.Text = "Thêm";
-            this.btnThemBienThe.Click += new System.EventHandler(this.btnThemBienThe_Click);
+            this.btnThemBienThe.Click += new System.EventHandler(this.btnThemBienThe_Click_1);
             // 
             // txtSoLuong
             // 
@@ -253,6 +267,7 @@ namespace PMQLBanDoTheThao.View
             this.txtSoLuong.Name = "txtSoLuong";
             this.txtSoLuong.Size = new System.Drawing.Size(91, 22);
             this.txtSoLuong.TabIndex = 1;
+            this.txtSoLuong.TextChanged += new System.EventHandler(this.txtSoLuong_TextChanged);
             // 
             // label7
             // 
@@ -262,6 +277,7 @@ namespace PMQLBanDoTheThao.View
             this.label7.Size = new System.Drawing.Size(63, 16);
             this.label7.TabIndex = 2;
             this.label7.Text = "Số lượng:";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // cmbMau
             // 
@@ -270,6 +286,7 @@ namespace PMQLBanDoTheThao.View
             this.cmbMau.Name = "cmbMau";
             this.cmbMau.Size = new System.Drawing.Size(171, 24);
             this.cmbMau.TabIndex = 3;
+            this.cmbMau.SelectedIndexChanged += new System.EventHandler(this.cmbMau_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -279,6 +296,7 @@ namespace PMQLBanDoTheThao.View
             this.label6.Size = new System.Drawing.Size(61, 16);
             this.label6.TabIndex = 4;
             this.label6.Text = "Màu sắc:";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // cmbSize
             // 
@@ -287,6 +305,7 @@ namespace PMQLBanDoTheThao.View
             this.cmbSize.Name = "cmbSize";
             this.cmbSize.Size = new System.Drawing.Size(171, 24);
             this.cmbSize.TabIndex = 5;
+            this.cmbSize.SelectedIndexChanged += new System.EventHandler(this.cmbSize_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -296,6 +315,7 @@ namespace PMQLBanDoTheThao.View
             this.label5.Size = new System.Drawing.Size(36, 16);
             this.label5.TabIndex = 6;
             this.label5.Text = "Size:";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // dgvSanPham
             // 
@@ -308,6 +328,7 @@ namespace PMQLBanDoTheThao.View
             this.dgvSanPham.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSanPham.Size = new System.Drawing.Size(961, 267);
             this.dgvSanPham.TabIndex = 1;
+            this.dgvSanPham.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSanPham_CellContentClick);
             // 
             // dgvBienThe
             // 
@@ -320,6 +341,11 @@ namespace PMQLBanDoTheThao.View
             this.dgvBienThe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBienThe.Size = new System.Drawing.Size(961, 192);
             this.dgvBienThe.TabIndex = 0;
+            this.dgvBienThe.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBienThe_CellContentClick);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // QuanLySanPham
             // 
