@@ -10,18 +10,15 @@ namespace PMQLBanDoTheThao.DataBase
 {
     public class DBConnection
     {
-<<<<<<< HEAD
-        private static readonly string strcon = @"Data Source=LAPTOP-LU61T8RJ;Initial Catalog=QL_BanHang;Integrated Security=True;TrustServerCertificate=True";
-=======
-        private static string strcon = @"Data Source=.;Initial Catalog=QL_BanHang;Integrated Security=True";
->>>>>>> feature/ql-nhan-vien
+        // giữ 1 connection string duy nhất
+        private static readonly string strcon = @"Data Source=.;Initial Catalog=QL_BanHang;Integrated Security=True;TrustServerCertificate=True";
 
         public static SqlConnection GetDBConnection()
         {
             return new SqlConnection(strcon);
         }
 
-        //hàm thực thi SQL => ExecuteNonQuery
+        // ExecuteNonQuery
         public static int ExecuteNonQuery(string sql, SqlParameter[] pa = null)
         {
             using (SqlConnection conn = GetDBConnection())
@@ -34,7 +31,6 @@ namespace PMQLBanDoTheThao.DataBase
                 return cmd.ExecuteNonQuery();
             }
         }
-
 
         public static DataTable GetDataTable(string sql, SqlParameter[] pa = null)
         {
