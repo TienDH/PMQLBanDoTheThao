@@ -47,7 +47,11 @@ namespace PMQLBanDoTheThao
 
         private void btnQuanLyNhanVien_Click(object sender, EventArgs e)
         {
-
+            panelMain.Controls.Clear();
+            QuanLyNhanVien uc = new QuanLyNhanVien();
+            uc.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(uc);
+            uc.BringToFront();
         }
 
         private void BtnQuanLyKho_Click(object sender, EventArgs e)
