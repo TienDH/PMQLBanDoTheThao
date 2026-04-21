@@ -65,20 +65,20 @@ namespace PMQLBanDoTheThao
 
         private void btnThongKeBaoCao_Click(object sender, EventArgs e)
         {
-            // 1. Xóa các Form cũ đang hiển thị trong Panel để lấy chỗ trống
-            panelContent.Controls.Clear();
+            //    // 1. Xóa các Form cũ đang hiển thị trong Panel để lấy chỗ trống
+            //    panelContent.Controls.Clear();
 
-            // 2. Khởi tạo Form Báo Cáo (đảm bảo bạn đã tạo file View/BaoCao.cs)
-            View.BaoCao frmBaoCao = new View.BaoCao();
+            //    // 2. Khởi tạo Form Báo Cáo (đảm bảo bạn đã tạo file View/BaoCao.cs)
+            //    //View.BaoCao frmBaoCao = new View.BaoCao();
 
-            // 3. Cấu hình để Form con có thể nhúng được vào Panel
-            frmBaoCao.TopLevel = false;                  // Bắt buộc: Để form không chạy độc lập
-            frmBaoCao.FormBorderStyle = FormBorderStyle.None; // Xóa viền/thanh tiêu đề của form con
-            frmBaoCao.Dock = DockStyle.Fill;             // Phóng to cho lấp đầy vùng màu trắng (panelContent)
+            //    // 3. Cấu hình để Form con có thể nhúng được vào Panel
+            //    frmBaoCao.TopLevel = false;                  // Bắt buộc: Để form không chạy độc lập
+            //    frmBaoCao.FormBorderStyle = FormBorderStyle.None; // Xóa viền/thanh tiêu đề của form con
+            //    frmBaoCao.Dock = DockStyle.Fill;             // Phóng to cho lấp đầy vùng màu trắng (panelContent)
 
-            // 4. Thêm Form con vào Panel và ra lệnh hiển thị
-            panelContent.Controls.Add(frmBaoCao);
-            frmBaoCao.Show();
+            //    // 4. Thêm Form con vào Panel và ra lệnh hiển thị
+            //    panelContent.Controls.Add(frmBaoCao);
+            //    frmBaoCao.Show();
         }
     }
 }

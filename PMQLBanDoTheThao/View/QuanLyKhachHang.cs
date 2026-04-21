@@ -131,5 +131,25 @@ namespace PMQLBanDoTheThao.View
                 }
             }
         }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            // Xóa trắng các ô nhập
+            txtHoTen.Clear();
+            txtSdt.Clear();
+            txtEmail.Clear(); // Dù tên là txtEmail nhưng bạn đang dùng cho Address
+
+            // Reset lại biến chọn khách hàng
+            selectedCustomerId = -1;
+
+            // Tải lại danh sách từ đầu
+            LoadData();
+        }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            string tuKhoa = txtTimKiem.Text;
+            dgvKhachHang.DataSource = controller.XuLyTimKiem(tuKhoa);
+        }
     } // Kết thúc đúng class ở đây
 }

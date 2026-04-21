@@ -15,6 +15,14 @@ namespace PMQLBanDoTheThao.Controller
         // ==========================================
         // 1. Hàm xử lý logic THÊM khách hàng
         // ==========================================
+        public List<Customer> XuLyTimKiem(string tuKhoa)
+        {
+            if (string.IsNullOrWhiteSpace(tuKhoa))
+            {
+                return db.GetAll(); // Nếu không gõ gì mà bấm tìm thì ra tất cả
+            }
+            return db.TimKiemKhachHang(tuKhoa.Trim());
+        }
         public string XuLyThemKhachHang(Customer cus)
         {
             // Kiểm tra rỗng
