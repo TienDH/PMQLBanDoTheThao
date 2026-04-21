@@ -10,12 +10,11 @@ namespace PMQLBanDoTheThao.DataBase
 {
     internal class DBConnection
     {
-<<<<<<< HEAD
 
-        private static string strcon = @"Data Source=.;Initial Catalog=QL_BanHang;Integrated Security=True";
-=======
+
+
         private static readonly string strcon = @"Data Source=LAPTOP-LU61T8RJ;Initial Catalog=QL_BanHang;Integrated Security=True;TrustServerCertificate=True";
->>>>>>> feature/ql-loai-sp
+
 
         public static SqlConnection GetDBConnection()
         {
