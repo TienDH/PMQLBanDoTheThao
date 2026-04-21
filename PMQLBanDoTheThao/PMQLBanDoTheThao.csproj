@@ -47,16 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\BaoCaoController.cs" />
     <Compile Include="Controller\QuanLyKhachHangController.cs" />
     <Compile Include="Controller\QuanLySanPhamController.cs" />
-    <Compile Include="DataBase\BaoCaoDB.cs" />
     <Compile Include="DataBase\CustomerDB.cs" />
     <Compile Include="DataBase\DBConnection.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Color.cs" />
     <Compile Include="Model\Customer.cs" />
-    <Compile Include="Model\DoanhThuReport.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductVariant.cs" />
     <Compile Include="Model\Size.cs" />
@@ -64,12 +61,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="View\BaoCao.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\BaoCao.Designer.cs">
-      <DependentUpon>BaoCao.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MainMenu.cs">
       <SubType>Form</SubType>
@@ -91,9 +82,6 @@
     <Compile Include="View\QuanLySanPham.Designer.cs">
       <DependentUpon>QuanLySanPham.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\BaoCao.resx">
-      <DependentUpon>BaoCao.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
