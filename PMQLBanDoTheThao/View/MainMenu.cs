@@ -66,40 +66,71 @@ namespace PMQLBanDoTheThao
 
         private void btnDangNhap_Click_1(object sender, EventArgs e)
         {
-            // Mở form login modal và truyền owner là MainMenu (this)
+            var res = MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res != DialogResult.Yes) return;
+
+            // 2. Xóa dữ liệu người dùng hiện tại
+            UserSession.CurrentUser = null;
+            panelMain.Controls.Clear();
+
+            // 3. ẨN CÁI KHUNG ĐẰNG SAU (MainMenu)
+            this.Hide();
+
+            // 4. Mở form Login
             using (var loginForm = new Login())
             {
-                loginForm.ShowDialog(this);
+                // ShowDialog sẽ dừng chương trình tại đây cho đến khi form Login đóng
+                loginForm.ShowDialog();
             }
 
-            // Sau khi form login đóng, cập nhật trạng thái hiển thị nút
-            UpdateAuthButtons();
+            // 5. Sau khi Login đóng, kiểm tra xem có ai đăng nhập mới không
+            if (UserSession.CurrentUser != null)
+            {
+                // Nếu đăng nhập thành công -> Cập nhật nút và HIỆN LẠI MainMenu
+                UpdateAuthButtons();
+                this.Show();
+            }
+            else
+            {
+                // Nếu họ bấm "Exit" ở form Login hoặc đóng mà không đăng nhập -> Thoát hẳn app
+                Application.Exit();
+            }
         }
 
         // Áp phân quyền: ẩn/hiện các control có Tag="AdminOnly" nếu không phải Admin
         public void ApplyRolePermissions()
         {
-
             var user = UserSession.CurrentUser;
+            if (user == null) return;
 
-            // Cho tất cả các nút hiện lên và sáng lên để có thể click được
-            btnQuanLyHoaDon.Visible = true;
-            btnQuanLyHoaDon.Enabled = true;
+            // 1. Xác định Role (giả sử Staff của bạn trong DB tên là "Staff")
+            bool isAdmin = string.Equals(user.Role, "Admin", StringComparison.OrdinalIgnoreCase);
+            bool isStaff = string.Equals(user.Role, "Staff", StringComparison.OrdinalIgnoreCase);
 
-            btnQuanLySanPham.Visible = true;
-            btnQuanLySanPham.Enabled = true;
+            // 2. Phân quyền ẩn/hiện các nút menu như cũ
+            btnQuanLySanPham.Visible = isAdmin;
+            btnQuanLyKhachHang.Visible = isAdmin;
+            BtnQuanLyKho.Visible = isAdmin;
+            btnQuanLyNhanVien.Visible = isAdmin;
+            btnThongKeBaoCao.Visible = isAdmin;
 
-            btnQuanLyKhachHang.Visible = true;
-            btnQuanLyKhachHang.Enabled = true;
+            // Nút hóa đơn thì cả Admin và Staff đều thấy
+            btnQuanLyHoaDon.Visible = isAdmin || isStaff;
 
-            BtnQuanLyKho.Enabled = true;
-            BtnQuanLyKho.Visible = true;
-           
-            btnQuanLyNhanVien.Visible = true;
-            btnQuanLyNhanVien.Enabled = true;
+            // 3. TỰ ĐỘNG HIỆN QUẢN LÝ HÓA ĐƠN KHI LÀ STAFF
+            if (isStaff)
+            {
+                MessageBox.Show("Tính năng Quản lý khách hàng đang được phát triển!", "Thông báo");
+                //Nếu có r thì xóa ghi chú dòng bên dưới và bỏ messagebox đi
+                //LoadControl(new QuanLyHoaDon());
+            }
+            else if (isAdmin)
+            {
+                panelMain.Controls.Clear();
 
-            btnThongKeBaoCao.Visible = true;
-            btnThongKeBaoCao.Enabled = true;
+                //Nếu có r thì xóa ghi chú dòng bên dưới và bỏ messagebox đi
+                //LoadControl(new ThongKeBaoCao());
+            }
         }
 
 
@@ -123,24 +154,33 @@ namespace PMQLBanDoTheThao
         // Sự kiện bấm nút Đăng xuất (tạo động)
         private void BtnDangXuat_Click(object sender, EventArgs e)
         {
-            // Xác nhận logout
-            var res = MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (res != DialogResult.Yes) return;
-
-            // Xóa session
-            UserSession.CurrentUser = null;
-            panelMain.Controls.Clear();
-            // Cập nhật UI (ẩn các control AdminOnly)
-            UpdateAuthButtons();
-
-            // Mở lại login modal để người dùng có thể đăng nhập lại
-            using (var loginForm = new Login())
+            var res = MessageBox.Show("Bạn có muốn đăng xuất và quay lại màn hình đăng nhập?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
             {
-                loginForm.ShowDialog(this);
-            }
+                // 1. Xóa session người dùng
+                UserSession.CurrentUser = null;
+                panelMain.Controls.Clear();
 
-            // Cập nhật UI lần nữa sau khi login lại
-            UpdateAuthButtons();
+                // 2. Ẩn form MainMenu hiện tại đi
+                this.Hide();
+
+                // 3. Mở lại form Login
+                using (var loginForm = new Login())
+                {
+                    // Nếu login thành công, DialogResult nên là OK (bạn cần set trong form Login)
+                    if (loginForm.ShowDialog() == DialogResult.OK)
+                    {
+                        // Cập nhật lại giao diện theo user mới
+                        UpdateAuthButtons();
+                        this.Show(); // Hiện lại MainMenu
+                    }
+                    else
+                    {
+                        // Nếu họ đóng form Login mà không đăng nhập -> Thoát app
+                        Application.Exit();
+                    }
+                }
+            }
         }
 
         //hàm check đăng nhập//
