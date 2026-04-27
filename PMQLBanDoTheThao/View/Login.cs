@@ -40,17 +40,14 @@ namespace PMQLBanDoTheThao.View
                 MessageBox.Show($"Chào mừng {UserSession.CurrentUser.Username} quay trở lại!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Kiểm tra nếu Form này được mở từ MainMenu (dùng ShowDialog)
-                if (this.Owner is MainMenu)
+                if (ctrl.Login(user, pass))
                 {
-                    this.DialogResult = DialogResult.OK; // Trả về kết quả để MainMenu biết đã login xong
-                    this.Close();
-                }
-                else
-                {
-                    
-                    this.Hide();
-                    MainMenu main = new MainMenu();
-                    main.ShowDialog();
+                    // Đăng nhập thành công
+                    MessageBox.Show($"Chào mừng {UserSession.CurrentUser.Username} quay trở lại!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // THAY ĐỔI QUAN TRỌNG Ở ĐÂY:
+                    // Gán kết quả OK và đóng Form Login lại
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
             }

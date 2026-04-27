@@ -70,7 +70,7 @@ namespace PMQLBanDoTheThao
             btnQuanLyHoaDon.Enabled = true;
             btnQuanLySanPham.Enabled = true;
             btnQuanLyKhachHang.Enabled = true;
-            BtnQuanLyKho.Enabled = true;
+
             btnQuanLyNhanVien.Enabled = true;
             btnThongKeBaoCao.Enabled = true;
             btnLoaiSP.Enabled = true;
@@ -82,15 +82,28 @@ namespace PMQLBanDoTheThao
             var res = MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res != DialogResult.Yes) return;
 
+            // 1. Xóa phiên đăng nhập hiện tại
             UserSession.CurrentUser = null;
-            panelMain.Controls.Clear();
-            UpdateAuthButtons();
 
-            using (var loginForm = new Login())
+            // 2. Ẩn MainMenu đi
+            this.Hide();
+
+            // 3. Hiển thị lại Login
+            // Lưu ý: Không dùng 'using' ở đây nếu Login là form khởi tạo ban đầu của ứng dụng
+            Login loginForm = new Login();
+
+            // Nếu người dùng đăng nhập lại thành công
+            if (loginForm.ShowDialog() == DialogResult.OK)
             {
-                loginForm.ShowDialog(this);
+                panelMain.Controls.Clear(); // Dọn dẹp nội dung cũ
+                UpdateAuthButtons();        // Cập nhật tên người dùng mới lên UI
+                this.Show();                // Hiện lại MainMenu
             }
-            UpdateAuthButtons();
+            else
+            {
+                // Nếu đóng Login mà không đăng nhập -> Thoát hẳn chương trình
+                Application.Exit();
+            }
         }
 
         private bool CheckPermission(string requiredRole = "")
@@ -174,13 +187,6 @@ namespace PMQLBanDoTheThao
             }
         }
 
-        private void BtnQuanLyKho_Click(object sender, EventArgs e)
-        {
-            if (CheckPermission("Admin"))
-            {
-                MessageBox.Show("Tính năng Quản lý kho đang được phát triển!", "Thông báo");
-            }
-        }
 
         private void btnThongKeBaoCao_Click(object sender, EventArgs e)
         {
