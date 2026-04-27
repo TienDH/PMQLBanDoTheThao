@@ -65,12 +65,15 @@
   <ItemGroup>
     <Compile Include="Controller\NhanVienController.cs" />
     <Compile Include="Controller\QuanLyLoaiSanPhamController.cs" />
+    <Compile Include="Controller\HoaDonController.cs" />
     <Compile Include="Controller\QuanLySanPhamController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\QuanLyVoucherController.cs" />
     <Compile Include="DataBase\DBConnection.cs" />
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\ChiTietHoaDon.cs" />
     <Compile Include="Model\Color.cs" />
+    <Compile Include="Model\HoaDon.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductVariant.cs" />
     <Compile Include="Model\Size.cs" />
@@ -107,6 +110,12 @@
     <Compile Include="View\QuanLyNhanVien.Designer.cs">
       <DependentUpon>QuanLyNhanVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\QuanLyHoaDon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\QuanLyHoaDon.Designer.cs">
+      <DependentUpon>QuanLyHoaDon.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\QuanLySanPham.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -142,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\QuanLyNhanVien.resx">
       <DependentUpon>QuanLyNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QuanLyHoaDon.resx">
+      <DependentUpon>QuanLyHoaDon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\QuanLySanPham.resx">
       <DependentUpon>QuanLySanPham.cs</DependentUpon>

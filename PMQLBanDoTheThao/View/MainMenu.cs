@@ -9,7 +9,6 @@ namespace PMQLBanDoTheThao
 {
     public partial class MainMenu : Form
     {
-        // Logout button được tạo động (không sửa Designer)
         private Button btnDangXuat;
 
         public MainMenu()
@@ -25,13 +24,12 @@ namespace PMQLBanDoTheThao
 
         private void InitializeDynamicControls()
         {
-            // Tạo btnDangXuat nhưng không hiển thị ngay
             btnDangXuat = new Button
             {
                 Anchor = (AnchorStyles.Top | AnchorStyles.Right),
                 Font = btnDangNhap.Font,
                 Size = btnDangNhap.Size,
-                Location = btnDangNhap.Location, // đặt cùng vị trí với btnDangNhap
+                Location = btnDangNhap.Location,
                 Text = "Đăng xuất",
                 Visible = false
             };
@@ -44,12 +42,9 @@ namespace PMQLBanDoTheThao
         private void UpdateAuthButtons()
         {
             bool loggedIn = UserSession.CurrentUser != null;
-
-            // Ẩn/hiện các nút login/logout
             btnDangNhap.Visible = !loggedIn;
             btnDangXuat.Visible = loggedIn;
 
-            // Cập nhật title
             if (loggedIn)
             {
                 this.Text = $"PMQL - Người dùng: {UserSession.CurrentUser.Username} ({UserSession.CurrentUser.Role})";
@@ -58,8 +53,6 @@ namespace PMQLBanDoTheThao
             {
                 this.Text = "PMQL";
             }
-
-            // Áp quyền hiển thị control theo role
             ApplyRolePermissions();
         }
 
@@ -74,7 +67,6 @@ namespace PMQLBanDoTheThao
 
         public void ApplyRolePermissions()
         {
-            // Mặc định cho hiện tất cả, bạn có thể thêm logic Tag ở đây nếu muốn ẩn nút hoàn toàn
             btnQuanLyHoaDon.Enabled = true;
             btnQuanLySanPham.Enabled = true;
             btnQuanLyKhachHang.Enabled = true;
@@ -119,7 +111,6 @@ namespace PMQLBanDoTheThao
                 MessageBox.Show("Bạn không đủ quyền để truy cập vào chức năng này!", "Từ chối truy cập", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return false;
             }
-
             return true;
         }
 
@@ -131,7 +122,7 @@ namespace PMQLBanDoTheThao
             uc.BringToFront();
         }
 
-        // --- CÁC SỰ KIỆN CLICK ĐÃ ĐƯỢC MERGE ---
+        // --- CÁC SỰ KIỆN CLICK ĐÃ HỢP NHẤT ---
 
         private void btnQuanLySanPham_Click_1(object sender, EventArgs e)
         {
@@ -169,7 +160,8 @@ namespace PMQLBanDoTheThao
         {
             if (CheckPermission())
             {
-                MessageBox.Show("Tính năng Quản lý hóa đơn đang được phát triển!", "Thông báo");
+                // Sử dụng UserControl từ nhánh Hoa Đơn
+                LoadControl(new QuanLyHoaDon());
             }
         }
 
@@ -177,6 +169,7 @@ namespace PMQLBanDoTheThao
         {
             if (CheckPermission("Admin"))
             {
+                // Hiện tại nhánh ql-khach-hang chưa merge nên tạm để thông báo
                 MessageBox.Show("Tính năng Quản lý khách hàng đang được phát triển!", "Thông báo");
             }
         }
@@ -193,12 +186,11 @@ namespace PMQLBanDoTheThao
         {
             if (CheckPermission("Admin"))
             {
+                // Tương tự cho nhánh báo cáo
                 MessageBox.Show("Tính năng Thống kê báo cáo đang được phát triển!", "Thông báo");
             }
         }
 
-        private void panelMain_Paint(object sender, PaintEventArgs e)
-        {
-        }
+        private void panelMain_Paint(object sender, PaintEventArgs e) { }
     }
 }

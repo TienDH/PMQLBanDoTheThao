@@ -10,19 +10,17 @@ namespace PMQLBanDoTheThao.DataBase
 {
     internal class DBConnection
     {
-
-
-
-        private static readonly string strcon = @"Data Source=LAPTOP-LU61T8RJ;Initial Catalog=QL_BanHang;Integrated Security=True;TrustServerCertificate=True";
-
+        // Thống nhất tên biến là ConnectionString để khớp với code ở các Controller mới
+        // Bạn hãy kiểm tra lại Data Source và Initial Catalog sao cho đúng với máy của bạn nhé.
+        // Tôi giữ lại Data Source của nhánh HEAD (LAPTOP-LU61T8RJ) vì có vẻ đây là máy chính của bạn.
+        public static readonly string ConnectionString = @"Data Source=LAPTOP-LU61T8RJ;Initial Catalog=QL_BanHang;Integrated Security=True;TrustServerCertificate=True";
 
         public static SqlConnection GetDBConnection()
         {
-            // Sửa lại biến truyền vào là strcon
-            return new SqlConnection(strcon);
+            return new SqlConnection(ConnectionString);
         }
 
-        // Hàm thực thi SQL (Thêm, Xóa, Sửa)
+        // Hàm thực thi SQL (Insert, Update, Delete)
         public static int ExecuteNonQuery(string sql, SqlParameter[] pa = null)
         {
             using (SqlConnection conn = GetDBConnection())
@@ -37,14 +35,13 @@ namespace PMQLBanDoTheThao.DataBase
             }
         }
 
-        // Hàm trả về DataTable (Dùng cho hiển thị danh sách và tìm kiếm)
+        // Hàm lấy dữ liệu (Đổ vào ComboBox, DataGridView, tìm kiếm)
         public static DataTable GetDataTable(string sql, SqlParameter[] pa = null)
         {
             using (SqlConnection conn = GetDBConnection())
             {
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
-                    // Quan trọng: Mở kết nối trước khi Fill dữ liệu
                     conn.Open();
                     if (pa != null)
                         cmd.Parameters.AddRange(pa);
