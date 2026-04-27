@@ -13,7 +13,7 @@ namespace PMQLBanDoTheThao.DataBase
         // Thống nhất tên biến là ConnectionString để khớp với code ở các Controller mới
         // Bạn hãy kiểm tra lại Data Source và Initial Catalog sao cho đúng với máy của bạn nhé.
         // Tôi giữ lại Data Source của nhánh HEAD (LAPTOP-LU61T8RJ) vì có vẻ đây là máy chính của bạn.
-        public static readonly string ConnectionString = @"Data Source=LAPTOP-LU61T8RJ;Initial Catalog=QL_BanHang;Integrated Security=True;TrustServerCertificate=True";
+        public static readonly string ConnectionString = @"Data Source=localhost\MSSQLSERVER01;Initial Catalog=QL_BanHang;Integrated Security=True";
 
         public static SqlConnection GetDBConnection()
         {

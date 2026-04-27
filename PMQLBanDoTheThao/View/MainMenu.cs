@@ -192,5 +192,23 @@ namespace PMQLBanDoTheThao
         }
 
         private void panelMain_Paint(object sender, PaintEventArgs e) { }
+
+        private void btnTrangchu_Click(object sender, EventArgs e)
+        {
+            if (CheckPermission())
+            {
+                LoadControl(new TrangChu());
+            }
+        }
+        // Hàm này được gọi từ Trang Chủ khi bấm nút "Mua Ngay"
+        public void ChuyenSangTrangHoaDon(int productId)
+        {
+            // Kiểm tra quyền (Nếu chưa đăng nhập thì bắt đăng nhập)
+            if (CheckPermission())
+            {
+                // Khởi tạo form Hóa đơn và truyền ID sản phẩm vào
+                LoadControl(new QuanLyHoaDon(productId));
+            }
+        }
     }
 }

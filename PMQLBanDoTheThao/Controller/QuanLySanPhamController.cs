@@ -12,7 +12,7 @@ namespace PMQLBanDoTheThao.Controller
 {
     public class QuanLySanPhamController
     {
-        
+
 
         public List<Product> GetAllProducts()
         {
@@ -102,7 +102,7 @@ namespace PMQLBanDoTheThao.Controller
             }
         }
 
-        
+
 
         public List<ProductVariant> GetVariantsByProductId(int productId)
         {
@@ -192,7 +192,25 @@ namespace PMQLBanDoTheThao.Controller
             return list;
         }
 
+        public List<Product> FilterProducts(int? categoryId, decimal? maxPrice)
+        {
+            // Câu lệnh SQL linh hoạt: Nếu tham số null thì bỏ qua điều kiện đó
+            string sql = @"
+        SELECT p.Id, p.Name, p.CategoryId, c.CategoryName, p.Price, p.ImagePath
+        FROM Product p
+        LEFT JOIN Category c ON p.CategoryId = c.Id
+        WHERE (@categoryId IS NULL OR p.CategoryId = @categoryId)
+          AND (@maxPrice IS NULL OR p.Price <= @maxPrice)
+        ORDER BY p.Price ASC";
 
+            SqlParameter[] parameters = {
+        new SqlParameter("@categoryId", (object)categoryId ?? DBNull.Value),
+        new SqlParameter("@maxPrice", (object)maxPrice ?? DBNull.Value)
+    };
+
+            DataTable dt = DBConnection.GetDataTable(sql, parameters);
+            return ConvertToProductList(dt);
+        }
 
         // Lấy danh sách tất cả Kích thước (Size) để đổ vào ComboBox
         public DataTable GetAllSizes()
@@ -217,4 +235,3 @@ namespace PMQLBanDoTheThao.Controller
 
     }
 }
-
