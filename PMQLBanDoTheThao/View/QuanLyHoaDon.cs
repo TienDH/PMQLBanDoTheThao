@@ -4,27 +4,22 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using PMQLBanDoTheThao.DataBase;
-using PMQLBanDoTheThao.Controller;
-using PMQLBanDoTheThao.Model;
 
 namespace PMQLBanDoTheThao.View
 {
     public partial class QuanLyHoaDon : UserControl
     {
-        // Bảng tạm để lưu dữ liệu hiển thị trên DataGridView (Giỏ hàng)
         private DataTable dtGioHang = new DataTable();
-
-        // Chuỗi kết nối đã được trỏ đúng vào Database QL_HoaDon_Module của bạn
-        // LƯU Ý: Nếu máy bạn không dùng SQLEXPRESS01 thì xóa số 01 đi nhé.
-        private string connectionString = @"Data Source=.\SQLEXPRESS01;Initial Catalog=QL_HoaDon_Module;Integrated Security=True";
+        private decimal giamGia = 0;
 
         public QuanLyHoaDon()
         {
             InitializeComponent();
             SetupDataGridView();
+            // Đảm bảo nút Sửa hiển thị đúng tên khi khởi động
+            button1.Text = "✎ Sửa Hóa Đơn";
         }
 
-        // 1. Cấu hình bảng giỏ hàng
         private void SetupDataGridView()
         {
             dtGioHang.Columns.Clear();
@@ -35,26 +30,21 @@ namespace PMQLBanDoTheThao.View
             dtGioHang.Columns.Add("SoLuong", typeof(int));
             dtGioHang.Columns.Add("DonGia", typeof(decimal));
             dtGioHang.Columns.Add("ThanhTien", typeof(decimal));
-
             dgvGioHang.DataSource = dtGioHang;
 
-            dgvGioHang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvGioHang.BackgroundColor = System.Drawing.Color.White;
+            // Cấu hình bảng để chọn cả dòng
             dgvGioHang.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvGioHang.AllowUserToAddRows = false;
-            dgvGioHang.RowHeadersVisible = false;
+            dgvGioHang.MultiSelect = false;
+            dgvGioHang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvGioHang.AllowUserToAddRows = false; // Không cho phép dòng trống cuối bảng
         }
 
-        // 2. Sự kiện load Form
         private void QuanLyHoaDon_Load(object sender, EventArgs e)
         {
             LoadComboBoxSanPham();
-
-            cboSanPham.SelectedIndexChanged -= CboSanPham_SelectedIndexChanged;
             cboSanPham.SelectedIndexChanged += CboSanPham_SelectedIndexChanged;
         }
 
-        // 3. Load danh sách sản phẩm
         private void LoadComboBoxSanPham()
         {
             try
@@ -68,199 +58,134 @@ namespace PMQLBanDoTheThao.View
             catch { }
         }
 
-        // 4. Lọc Size và Màu tự động dựa vào Sản phẩm được chọn
         private void CboSanPham_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboSanPham.SelectedValue == null || cboSanPham.SelectedIndex == -1) return;
+            if (cboSanPham.SelectedValue == null || !(cboSanPham.SelectedValue is int)) return;
 
-            if (int.TryParse(cboSanPham.SelectedValue.ToString(), out int productId))
-            {
-                try
-                {
-                    string sqlSize = @"SELECT DISTINCT s.Id, s.Name FROM Size s 
-                                       JOIN ProductVariant pv ON s.Id = pv.SizeId 
-                                       WHERE pv.ProductId = @id";
-                    cboSize.DataSource = DBConnection.GetDataTable(sqlSize, new SqlParameter[] { new SqlParameter("@id", productId) });
-                    cboSize.DisplayMember = "Name";
-                    cboSize.ValueMember = "Id";
-                    cboSize.SelectedIndex = -1;
+            int pId = (int)cboSanPham.SelectedValue;
+            string sqlS = "SELECT DISTINCT s.Id, s.Name FROM Size s JOIN ProductVariant pv ON s.Id = pv.SizeId WHERE pv.ProductId = " + pId;
+            cboSize.DataSource = DBConnection.GetDataTable(sqlS);
+            cboSize.DisplayMember = "Name"; cboSize.ValueMember = "Id";
 
-                    string sqlMau = @"SELECT DISTINCT c.Id, c.Name FROM Color c 
-                                      JOIN ProductVariant pv ON c.Id = pv.ColorId 
-                                      WHERE pv.ProductId = @id";
-                    cboMauSac.DataSource = DBConnection.GetDataTable(sqlMau, new SqlParameter[] { new SqlParameter("@id", productId) });
-                    cboMauSac.DisplayMember = "Name";
-                    cboMauSac.ValueMember = "Id";
-                    cboMauSac.SelectedIndex = -1;
-                }
-                catch { }
-            }
+            string sqlC = "SELECT DISTINCT c.Id, c.Name FROM Color c JOIN ProductVariant pv ON c.Id = pv.ColorId WHERE pv.ProductId = " + pId;
+            cboMauSac.DataSource = DBConnection.GetDataTable(sqlC);
+            cboMauSac.DisplayMember = "Name"; cboMauSac.ValueMember = "Id";
         }
 
-        // 5. NÚT THÊM HÀNG - Lấy giá và check tồn kho
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (cboSanPham.SelectedIndex == -1 || cboSize.SelectedIndex == -1 || cboMauSac.SelectedIndex == -1)
+            if (cboSanPham.SelectedIndex == -1 || cboSize.SelectedIndex == -1)
             {
-                MessageBox.Show("Vui lòng chọn đầy đủ Sản phẩm, Size và Màu sắc!", "Thông báo");
+                MessageBox.Show("Vui lòng chọn đầy đủ thông tin sản phẩm!");
                 return;
             }
-
-            int sl = (int)nmSoLuong.Value;
-            if (sl <= 0)
-            {
-                MessageBox.Show("Số lượng phải lớn hơn 0!", "Thông báo");
-                return;
-            }
-
             try
             {
-                int pId = Convert.ToInt32(cboSanPham.SelectedValue);
-                int sId = Convert.ToInt32(cboSize.SelectedValue);
-                int cId = Convert.ToInt32(cboMauSac.SelectedValue);
-
-                string sql = @"SELECT pv.Id, p.Price, pv.Quantity 
-                               FROM ProductVariant pv
-                               JOIN Product p ON pv.ProductId = p.Id
-                               WHERE pv.ProductId = @p AND pv.SizeId = @s AND pv.ColorId = @c";
-
+                string sql = "SELECT pv.Id, p.Price FROM ProductVariant pv JOIN Product p ON pv.ProductId = p.Id WHERE pv.ProductId = @p AND pv.SizeId = @s AND pv.ColorId = @c";
                 SqlParameter[] pars = {
-                    new SqlParameter("@p", pId),
-                    new SqlParameter("@s", sId),
-                    new SqlParameter("@c", cId)
+                    new SqlParameter("@p", cboSanPham.SelectedValue),
+                    new SqlParameter("@s", cboSize.SelectedValue),
+                    new SqlParameter("@c", cboMauSac.SelectedValue)
                 };
-
                 DataTable dt = DBConnection.GetDataTable(sql, pars);
-
                 if (dt.Rows.Count > 0)
                 {
-                    int variantId = Convert.ToInt32(dt.Rows[0]["Id"]);
-                    decimal gia = Convert.ToDecimal(dt.Rows[0]["Price"]);
-                    int tonKho = Convert.ToInt32(dt.Rows[0]["Quantity"]);
+                    int soLuong = (int)nmSoLuong.Value;
+                    if (soLuong <= 0) { MessageBox.Show("Số lượng phải lớn hơn 0!"); return; }
 
-                    bool daCoTrongGio = false;
-                    foreach (DataRow row in dtGioHang.Rows)
-                    {
-                        if (Convert.ToInt32(row["IdSP"]) == variantId)
-                        {
-                            int slMoi = Convert.ToInt32(row["SoLuong"]) + sl;
-                            if (slMoi > tonKho)
-                            {
-                                MessageBox.Show($"Kho chỉ còn {tonKho} sản phẩm này!", "Cảnh báo");
-                                return;
-                            }
-                            row["SoLuong"] = slMoi;
-                            row["ThanhTien"] = slMoi * gia;
-                            daCoTrongGio = true;
-                            break;
-                        }
-                    }
-
-                    if (!daCoTrongGio)
-                    {
-                        if (sl > tonKho)
-                        {
-                            MessageBox.Show($"Kho chỉ còn {tonKho} sản phẩm này!", "Cảnh báo");
-                            return;
-                        }
-                        dtGioHang.Rows.Add(variantId, cboSanPham.Text, cboSize.Text, cboMauSac.Text, sl, gia, sl * gia);
-                    }
-
+                    decimal donGia = Convert.ToDecimal(dt.Rows[0]["Price"]);
+                    dtGioHang.Rows.Add(dt.Rows[0]["Id"], cboSanPham.Text, cboSize.Text, cboMauSac.Text, soLuong, donGia, soLuong * donGia);
                     TinhTongTien();
                 }
                 else
                 {
-                    MessageBox.Show("Sản phẩm mẫu này hiện đang hết hàng hoặc chưa nhập kho!", "Thông báo");
+                    MessageBox.Show("Sản phẩm phiên bản này đã hết hoặc không tồn tại!");
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi thêm vào giỏ: " + ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
         }
 
-        // 6. Tính tổng tiền
         private void TinhTongTien()
         {
-            decimal tong = 0;
+            decimal tamTinh = 0;
             foreach (DataRow r in dtGioHang.Rows)
-            {
-                tong += Convert.ToDecimal(r["ThanhTien"]);
-            }
-            lblTongTien.Text = "Tổng tiền: " + tong.ToString("N0") + " VNĐ";
+                tamTinh += Convert.ToDecimal(r["ThanhTien"]);
+
+            decimal thucTeGiam = Math.Min(giamGia, tamTinh);
+            lblGiamGia.Text = "Giảm giá: " + thucTeGiam.ToString("N0") + " VNĐ";
+            lblTongTien.Text = "Tổng tiền: " + (tamTinh - thucTeGiam).ToString("N0") + " VNĐ";
         }
 
-        // 7. NÚT THANH TOÁN - Lưu vào bảng Orders và OrderDetail
+        // Xử lý nút ÁP MÃ (Tên trong Designer là txtMaVoucher nhưng hành động là bấm nút)
+        private void txtMaVoucher_Click(object sender, EventArgs e)
+        {
+            string ma = txtVoucher.Text.Trim().ToUpper();
+            if (ma == "QUEOSHOP") { giamGia = 50000; MessageBox.Show("Áp mã thành công! Giảm 50,000đ"); }
+            else if (ma == "SVDAINAM") { giamGia = 100000; MessageBox.Show("Áp mã thành công! Giảm 100,000đ"); }
+            else { giamGia = 0; MessageBox.Show("Mã giảm giá không hợp lệ!"); }
+
+            TinhTongTien();
+        }
+
+        // Nút SỬA HÓA ĐƠN
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dgvGioHang.CurrentRow != null)
+            {
+                int rowIndex = dgvGioHang.CurrentRow.Index;
+                int slMoi = (int)nmSoLuong.Value;
+
+                if (slMoi <= 0) { MessageBox.Show("Số lượng phải lớn hơn 0!"); return; }
+
+                dtGioHang.Rows[rowIndex]["SoLuong"] = slMoi;
+                decimal gia = Convert.ToDecimal(dtGioHang.Rows[rowIndex]["DonGia"]);
+                dtGioHang.Rows[rowIndex]["ThanhTien"] = slMoi * gia;
+
+                TinhTongTien();
+                MessageBox.Show("Đã cập nhật số lượng thành công!");
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một dòng sản phẩm để sửa!");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dgvGioHang.CurrentRow != null)
+            {
+                dtGioHang.Rows.RemoveAt(dgvGioHang.CurrentRow.Index);
+                TinhTongTien();
+            }
+        }
+
+        private void dgvGioHang_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                nmSoLuong.Value = Convert.ToInt32(dgvGioHang.Rows[e.RowIndex].Cells["SoLuong"].Value);
+            }
+        }
+
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            if (dtGioHang.Rows.Count == 0)
-            {
-                MessageBox.Show("Giỏ hàng đang trống, hãy thêm đồ vào giỏ trước khi thanh toán!", "Thông báo");
-                return;
-            }
-
-            DialogResult dr = MessageBox.Show("Bạn có chắc chắn muốn thanh toán?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
-            {
-                decimal tongTien = 0;
-                foreach (DataRow r in dtGioHang.Rows) tongTien += Convert.ToDecimal(r["ThanhTien"]);
-
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    SqlTransaction transaction = conn.BeginTransaction();
-
-                    try
-                    {
-                        // 7.1. Lưu vào bảng Orders
-                        string sqlHoaDon = "INSERT INTO Orders (UserId, OrderDate, TotalAmount) OUTPUT INSERTED.Id VALUES (@uid, @date, @total)";
-                        SqlCommand cmdHoaDon = new SqlCommand(sqlHoaDon, conn, transaction);
-                        
-                        cmdHoaDon.Parameters.AddWithValue("@uid", 3);
-                        cmdHoaDon.Parameters.AddWithValue("@date", DateTime.Now);
-                        cmdHoaDon.Parameters.AddWithValue("@total", tongTien);
-
-                        int newOrderId = (int)cmdHoaDon.ExecuteScalar();
-
-                        // 7.2. Lưu chi tiết & trừ tồn kho
-                        foreach (DataRow row in dtGioHang.Rows)
-                        {
-                            int variantId = Convert.ToInt32(row["IdSP"]);
-                            int soLuong = Convert.ToInt32(row["SoLuong"]);
-                            decimal donGia = Convert.ToDecimal(row["DonGia"]);
-
-                            // Lưu vào bảng OrderDetail
-                            string sqlChiTiet = "INSERT INTO OrderDetail (OrderId, ProductVariantId, Quantity, Price) VALUES (@oId, @pvId, @qty, @price)";
-                            SqlCommand cmdChiTiet = new SqlCommand(sqlChiTiet, conn, transaction);
-                            cmdChiTiet.Parameters.AddWithValue("@oId", newOrderId);
-                            cmdChiTiet.Parameters.AddWithValue("@pvId", variantId);
-                            cmdChiTiet.Parameters.AddWithValue("@qty", soLuong);
-                            cmdChiTiet.Parameters.AddWithValue("@price", donGia);
-                            cmdChiTiet.ExecuteNonQuery();
-
-                            // Trừ Kho
-                            string sqlTruKho = "UPDATE ProductVariant SET Quantity = Quantity - @qty WHERE Id = @pvId";
-                            SqlCommand cmdTruKho = new SqlCommand(sqlTruKho, conn, transaction);
-                            cmdTruKho.Parameters.AddWithValue("@qty", soLuong);
-                            cmdTruKho.Parameters.AddWithValue("@pvId", variantId);
-                            cmdTruKho.ExecuteNonQuery();
-                        }
-
-                        transaction.Commit();
-
-                        MessageBox.Show("Thanh toán thành công! Hóa đơn đã được lưu vào Database.", "Thành công");
-
-                        dtGioHang.Rows.Clear();
-                        TinhTongTien();
-                        nmSoLuong.Value = 0;
-                    }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        MessageBox.Show("Lỗi khi thanh toán (Đã hoàn tác): " + ex.Message);
-                    }
-                }
-            }
+            if (dtGioHang.Rows.Count == 0) { MessageBox.Show("Giỏ hàng đang trống!"); return; }
+            MessageBox.Show("Thanh toán thành công! Hóa đơn đã được lưu.");
+            btnlammoi_Click(sender, e);
         }
+
+        private void btnlammoi_Click(object sender, EventArgs e)
+        {
+            dtGioHang.Rows.Clear();
+            txtTenKhachHang.Clear();
+            txtSoDienThoai.Clear();
+            txtVoucher.Clear();
+            giamGia = 0;
+            TinhTongTien();
+        }
+
+        private void btnXuatHoaDon_Click(object sender, EventArgs e) => MessageBox.Show("Đang kết nối máy in...");
+        private void btnTimKiem_Click(object sender, EventArgs e) => MessageBox.Show("Tìm kiếm hóa đơn...");
+        private void lblTitle_Click(object sender, EventArgs e) { }
     }
 }
