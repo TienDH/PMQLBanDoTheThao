@@ -70,7 +70,6 @@
             this.btnThongKeBaoCao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThongKeBaoCao.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.btnThongKeBaoCao.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnThongKeBaoCao.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThongKeBaoCao.Location = new System.Drawing.Point(0, 460);
             this.btnThongKeBaoCao.Name = "btnThongKeBaoCao";
             this.btnThongKeBaoCao.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -78,7 +77,6 @@
             this.btnThongKeBaoCao.TabIndex = 2;
             this.btnThongKeBaoCao.Text = "  Thống Kê Báo Cáo";
             this.btnThongKeBaoCao.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnThongKeBaoCao.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThongKeBaoCao.Click += new System.EventHandler(this.btnThongKeBaoCao_Click);
             // 
             // btnQuanLyNhanVien
@@ -89,7 +87,6 @@
             this.btnQuanLyNhanVien.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuanLyNhanVien.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.btnQuanLyNhanVien.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnQuanLyNhanVien.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnQuanLyNhanVien.Location = new System.Drawing.Point(0, 405);
             this.btnQuanLyNhanVien.Name = "btnQuanLyNhanVien";
             this.btnQuanLyNhanVien.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -97,7 +94,6 @@
             this.btnQuanLyNhanVien.TabIndex = 4;
             this.btnQuanLyNhanVien.Text = "  Nhân Viên";
             this.btnQuanLyNhanVien.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnQuanLyNhanVien.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnQuanLyNhanVien.Click += new System.EventHandler(this.btnQuanLyNhanVien_Click);
             // 
             // btnQuanLyKhachHang
@@ -108,7 +104,6 @@
             this.btnQuanLyKhachHang.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuanLyKhachHang.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.btnQuanLyKhachHang.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnQuanLyKhachHang.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnQuanLyKhachHang.Location = new System.Drawing.Point(0, 350);
             this.btnQuanLyKhachHang.Name = "btnQuanLyKhachHang";
             this.btnQuanLyKhachHang.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -116,7 +111,6 @@
             this.btnQuanLyKhachHang.TabIndex = 5;
             this.btnQuanLyKhachHang.Text = "  Khách Hàng";
             this.btnQuanLyKhachHang.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnQuanLyKhachHang.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnQuanLyKhachHang.Click += new System.EventHandler(this.btnQuanLyKhachHang_Click);
             // 
             // button1
@@ -127,7 +121,6 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.button1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.Location = new System.Drawing.Point(0, 295);
             this.button1.Name = "button1";
             this.button1.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -135,7 +128,6 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "  Khuyến Mãi (Voucher)";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnLoaiSP
@@ -146,7 +138,6 @@
             this.btnLoaiSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoaiSP.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.btnLoaiSP.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnLoaiSP.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLoaiSP.Location = new System.Drawing.Point(0, 240);
             this.btnLoaiSP.Name = "btnLoaiSP";
             this.btnLoaiSP.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -154,7 +145,6 @@
             this.btnLoaiSP.TabIndex = 1;
             this.btnLoaiSP.Text = "  Loại Sản Phẩm";
             this.btnLoaiSP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLoaiSP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLoaiSP.Click += new System.EventHandler(this.btnLoaiSP_Click);
             // 
             // btnQuanLySanPham
@@ -165,7 +155,6 @@
             this.btnQuanLySanPham.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuanLySanPham.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.btnQuanLySanPham.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnQuanLySanPham.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnQuanLySanPham.Location = new System.Drawing.Point(0, 185);
             this.btnQuanLySanPham.Name = "btnQuanLySanPham";
             this.btnQuanLySanPham.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -173,7 +162,6 @@
             this.btnQuanLySanPham.TabIndex = 7;
             this.btnQuanLySanPham.Text = "  Sản Phẩm";
             this.btnQuanLySanPham.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnQuanLySanPham.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnQuanLySanPham.Click += new System.EventHandler(this.btnQuanLySanPham_Click_1);
             // 
             // btnQuanLyHoaDon
@@ -184,7 +172,6 @@
             this.btnQuanLyHoaDon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuanLyHoaDon.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.btnQuanLyHoaDon.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnQuanLyHoaDon.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnQuanLyHoaDon.Location = new System.Drawing.Point(0, 130);
             this.btnQuanLyHoaDon.Name = "btnQuanLyHoaDon";
             this.btnQuanLyHoaDon.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -192,7 +179,6 @@
             this.btnQuanLyHoaDon.TabIndex = 6;
             this.btnQuanLyHoaDon.Text = "  Hóa Đơn / Bán Hàng";
             this.btnQuanLyHoaDon.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnQuanLyHoaDon.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnQuanLyHoaDon.Click += new System.EventHandler(this.btnQuanLyHoaDon_Click);
             // 
             // btnTrangchu
@@ -203,7 +189,6 @@
             this.btnTrangchu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrangchu.Font = new System.Drawing.Font("Segoe UI", 10.5F);
             this.btnTrangchu.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnTrangchu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTrangchu.Location = new System.Drawing.Point(0, 75);
             this.btnTrangchu.Name = "btnTrangchu";
             this.btnTrangchu.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -211,7 +196,6 @@
             this.btnTrangchu.TabIndex = 8;
             this.btnTrangchu.Text = "  Trang Chủ";
             this.btnTrangchu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTrangchu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTrangchu.Click += new System.EventHandler(this.btnTrangchu_Click);
             // 
             // panel3
@@ -302,7 +286,6 @@
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(1197, 712);
             this.panelMain.TabIndex = 2;
-            this.panelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMain_Paint);
             // 
             // contextMenuStrip1
             // 
@@ -359,8 +342,6 @@
         private System.Windows.Forms.Button btnLoaiSP;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnTrangchu;
-
-        // Thêm biến để dùng cho giao diện mới
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.Label lblPageTitle;
         private System.Windows.Forms.Panel panelTopBorder;

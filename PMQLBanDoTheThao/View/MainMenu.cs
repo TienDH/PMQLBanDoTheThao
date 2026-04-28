@@ -67,10 +67,10 @@ namespace PMQLBanDoTheThao
 
         public void ApplyRolePermissions()
         {
+            // Mặc định cho phép tất cả các nút (Logic cũ của bạn)
             btnQuanLyHoaDon.Enabled = true;
             btnQuanLySanPham.Enabled = true;
             btnQuanLyKhachHang.Enabled = true;
-
             btnQuanLyNhanVien.Enabled = true;
             btnThongKeBaoCao.Enabled = true;
             btnLoaiSP.Enabled = true;
@@ -82,26 +82,18 @@ namespace PMQLBanDoTheThao
             var res = MessageBox.Show("Bạn có chắc muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res != DialogResult.Yes) return;
 
-            // 1. Xóa phiên đăng nhập hiện tại
             UserSession.CurrentUser = null;
-
-            // 2. Ẩn MainMenu đi
             this.Hide();
 
-            // 3. Hiển thị lại Login
-            // Lưu ý: Không dùng 'using' ở đây nếu Login là form khởi tạo ban đầu của ứng dụng
             Login loginForm = new Login();
-
-            // Nếu người dùng đăng nhập lại thành công
             if (loginForm.ShowDialog() == DialogResult.OK)
             {
-                panelMain.Controls.Clear(); // Dọn dẹp nội dung cũ
-                UpdateAuthButtons();        // Cập nhật tên người dùng mới lên UI
-                this.Show();                // Hiện lại MainMenu
+                panelMain.Controls.Clear();
+                UpdateAuthButtons();
+                this.Show();
             }
             else
             {
-                // Nếu đóng Login mà không đăng nhập -> Thoát hẳn chương trình
                 Application.Exit();
             }
         }
@@ -173,31 +165,27 @@ namespace PMQLBanDoTheThao
         {
             if (CheckPermission())
             {
-                // Sử dụng UserControl từ nhánh Hoa Đơn
                 LoadControl(new QuanLyHoaDon());
             }
         }
 
         private void btnQuanLyKhachHang_Click(object sender, EventArgs e)
         {
+            // Merge logic Quản lý khách hàng vào đây
             if (CheckPermission("Admin"))
             {
-                // Hiện tại nhánh ql-khach-hang chưa merge nên tạm để thông báo
-                MessageBox.Show("Tính năng Quản lý khách hàng đang được phát triển!", "Thông báo");
+                LoadControl(new PMQLBanDoTheThao.View.QuanLyKhachHang());
             }
         }
-
 
         private void btnThongKeBaoCao_Click(object sender, EventArgs e)
         {
             if (CheckPermission("Admin"))
             {
-                // Tương tự cho nhánh báo cáo
+                // Hiện tại code Báo Cáo chưa được merge vào Master sạch, tạm thời để MessageBox
                 MessageBox.Show("Tính năng Thống kê báo cáo đang được phát triển!", "Thông báo");
             }
         }
-
-        private void panelMain_Paint(object sender, PaintEventArgs e) { }
 
         private void btnTrangchu_Click(object sender, EventArgs e)
         {
@@ -206,15 +194,15 @@ namespace PMQLBanDoTheThao
                 LoadControl(new TrangChu());
             }
         }
-        // Hàm này được gọi từ Trang Chủ khi bấm nút "Mua Ngay"
+
         public void ChuyenSangTrangHoaDon(int productId)
         {
-            // Kiểm tra quyền (Nếu chưa đăng nhập thì bắt đăng nhập)
             if (CheckPermission())
             {
-                // Khởi tạo form Hóa đơn và truyền ID sản phẩm vào
                 LoadControl(new QuanLyHoaDon(productId));
             }
         }
+
+        private void panelMain_Paint(object sender, PaintEventArgs e) { }
     }
 }

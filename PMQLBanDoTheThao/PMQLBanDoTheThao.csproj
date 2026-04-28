@@ -13,8 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <NuGetPackageImportStamp></NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -80,6 +79,7 @@
     <Compile Include="Controller\NhanVienController.cs" />
     <Compile Include="Controller\QuanLyLoaiSanPhamController.cs" />
     <Compile Include="Controller\HoaDonController.cs" />
+    <Compile Include="Controller\QuanLyKhachHangController.cs" />
     <Compile Include="Controller\QuanLySanPhamController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\QuanLyVoucherController.cs" />
@@ -88,6 +88,7 @@
     <Compile Include="Model\ChiTietHoaDon.cs" />
     <Compile Include="Model\Color.cs" />
     <Compile Include="Model\HoaDon.cs" />
+    <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductVariant.cs" />
     <Compile Include="Model\Size.cs" />
@@ -142,6 +143,12 @@
     <Compile Include="View\QuanLyVoucher.Designer.cs">
       <DependentUpon>QuanLyVoucher.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\QuanLyKhachHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\QuanLyKhachHang.Designer.cs">
+      <DependentUpon>QuanLyKhachHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -181,6 +188,9 @@
     <EmbeddedResource Include="View\QuanLyVoucher.resx">
       <DependentUpon>QuanLyVoucher.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\QuanLyKhachHang.resx">
+      <DependentUpon>QuanLyKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -204,7 +214,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\FastReport.OpenSource.2026.2.1\build\FastReport.OpenSource.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FastReport.OpenSource.2026.2.1\build\FastReport.OpenSource.props'))" />
   </Target>
