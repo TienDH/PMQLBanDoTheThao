@@ -49,11 +49,11 @@
   <ItemGroup>
     <Compile Include="Controller\BaoCaoController.cs" />
     <Compile Include="Controller\QuanLySanPhamController.cs" />
-    <Compile Include="DataBase\BaoCaoDB.cs" />
     <Compile Include="DataBase\DBConnection.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Color.cs" />
     <Compile Include="Model\DoanhThuReport.cs" />
+    <Compile Include="Model\OrderDetailReport.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductVariant.cs" />
     <Compile Include="Model\Size.cs" />
@@ -71,7 +71,7 @@
       <DependentUpon>QL_BanHangDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="View\BaoCao.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\BaoCao.Designer.cs">
       <DependentUpon>BaoCao.cs</DependentUpon>

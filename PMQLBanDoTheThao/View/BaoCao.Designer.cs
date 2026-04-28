@@ -2,12 +2,12 @@
 {
     partial class BaoCao
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,14 +20,17 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dtpTuNgay = new System.Windows.Forms.DateTimePicker();
             this.btnThongKe = new System.Windows.Forms.Button();
             this.dgvBaoCao = new System.Windows.Forms.DataGridView();
@@ -36,7 +39,9 @@
             this.dtpDenNgay = new System.Windows.Forms.DateTimePicker();
             this.lblTongDoanhThu = new System.Windows.Forms.Label();
             this.btnXuatExcel = new System.Windows.Forms.Button();
+            this.chartDoanhThu = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBaoCao)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartDoanhThu)).BeginInit();
             this.SuspendLayout();
             // 
             // dtpTuNgay
@@ -67,7 +72,7 @@
             this.dgvBaoCao.Name = "dgvBaoCao";
             this.dgvBaoCao.RowHeadersWidth = 51;
             this.dgvBaoCao.RowTemplate.Height = 24;
-            this.dgvBaoCao.Size = new System.Drawing.Size(786, 328);
+            this.dgvBaoCao.Size = new System.Drawing.Size(1258, 403);
             this.dgvBaoCao.TabIndex = 2;
             // 
             // label1
@@ -99,9 +104,10 @@
             // lblTongDoanhThu
             // 
             this.lblTongDoanhThu.AutoSize = true;
-            this.lblTongDoanhThu.Location = new System.Drawing.Point(512, 99);
+            this.lblTongDoanhThu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTongDoanhThu.Location = new System.Drawing.Point(510, 90);
             this.lblTongDoanhThu.Name = "lblTongDoanhThu";
-            this.lblTongDoanhThu.Size = new System.Drawing.Size(102, 16);
+            this.lblTongDoanhThu.Size = new System.Drawing.Size(167, 25);
             this.lblTongDoanhThu.TabIndex = 6;
             this.lblTongDoanhThu.Text = "Tổng Doanh thu";
             // 
@@ -115,11 +121,28 @@
             this.btnXuatExcel.UseVisualStyleBackColor = true;
             this.btnXuatExcel.Click += new System.EventHandler(this.btnXuatExcel_Click);
             // 
+            // chartDoanhThu
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chartDoanhThu.ChartAreas.Add(chartArea3);
+            this.chartDoanhThu.Dock = System.Windows.Forms.DockStyle.Bottom;
+            legend3.Name = "Legend1";
+            this.chartDoanhThu.Legends.Add(legend3);
+            this.chartDoanhThu.Location = new System.Drawing.Point(0, 532);
+            this.chartDoanhThu.Name = "chartDoanhThu";
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartDoanhThu.Series.Add(series3);
+            this.chartDoanhThu.Size = new System.Drawing.Size(1273, 260);
+            this.chartDoanhThu.TabIndex = 8;
+            this.chartDoanhThu.Text = "chart1";
+            // 
             // BaoCao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.chartDoanhThu);
             this.Controls.Add(this.btnXuatExcel);
             this.Controls.Add(this.lblTongDoanhThu);
             this.Controls.Add(this.dtpDenNgay);
@@ -129,8 +152,9 @@
             this.Controls.Add(this.btnThongKe);
             this.Controls.Add(this.dtpTuNgay);
             this.Name = "BaoCao";
-            this.Text = "BaoCao";
+            this.Size = new System.Drawing.Size(1273, 792);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBaoCao)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartDoanhThu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,5 +170,6 @@
         private System.Windows.Forms.DateTimePicker dtpDenNgay;
         private System.Windows.Forms.Label lblTongDoanhThu;
         private System.Windows.Forms.Button btnXuatExcel;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartDoanhThu;
     }
 }

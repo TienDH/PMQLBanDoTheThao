@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PMQLBanDoTheThao.DataBase
 {
@@ -17,20 +13,16 @@ namespace PMQLBanDoTheThao.DataBase
             return new SqlConnection(strcon);
         }
 
-        //hàm thực thi SQL => ExecuteNonQuery
         public static int ExecuteNonQuery(string sql, SqlParameter[] pa = null)
         {
             using (SqlConnection conn = GetDBConnection())
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
+                if (pa != null) cmd.Parameters.AddRange(pa);
                 conn.Open();
-                if (pa != null)
-                    cmd.Parameters.AddRange(pa);
-
                 return cmd.ExecuteNonQuery();
             }
-        }
-
+        }   
 
         public static DataTable GetDataTable(string sql, SqlParameter[] pa = null)
         {
@@ -38,13 +30,21 @@ namespace PMQLBanDoTheThao.DataBase
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             using (SqlDataAdapter da = new SqlDataAdapter(cmd))
             {
-                if (pa != null)
-                    cmd.Parameters.AddRange(pa);
-
-                conn.Open();
+                if (pa != null) cmd.Parameters.AddRange(pa);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 return dt;
+            }
+        }
+
+        public static object ExecuteScalar(string sql, SqlParameter[] pa = null)
+        {
+            using (SqlConnection conn = GetDBConnection())
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                if (pa != null) cmd.Parameters.AddRange(pa);
+                conn.Open();
+                return cmd.ExecuteScalar();
             }
         }
     }

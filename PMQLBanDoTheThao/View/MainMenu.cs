@@ -57,20 +57,19 @@ namespace PMQLBanDoTheThao
 
         private void btnThongKeBaoCao_Click(object sender, EventArgs e)
         {
-            // 1. Xóa giao diện cũ đang hiển thị
+            // 1. Xóa giao diện cũ đang hiển thị trong vùng chính
             panelMain.Controls.Clear();
 
-            // 2. Gọi Form Báo Cáo
-            View.BaoCao frmBaoCao = new View.BaoCao();
+            // 2. Khởi tạo UserControl Báo Cáo (Không phải Form nữa nên không dùng TopLevel)
+            View.BaoCao ucBaoCao = new View.BaoCao();
 
-            // 3. Ép Form thành Control con để nhúng được vào Panel
-            frmBaoCao.TopLevel = false;
-            frmBaoCao.FormBorderStyle = FormBorderStyle.None;
-            frmBaoCao.Dock = DockStyle.Fill; // Tự động phóng to cho vừa khít
+            // 3. Thiết lập thuộc tính để nhúng vào Panel
+            ucBaoCao.Dock = DockStyle.Fill; // Tự động phóng to cho vừa khít panelMain
 
-            // 4. Hiển thị lên
-            panelMain.Controls.Add(frmBaoCao);
-            frmBaoCao.Show();
+            // 4. Thêm vào Panel và hiển thị
+            panelMain.Controls.Add(ucBaoCao);
+
+            // Lưu ý: UserControl không cần gọi .Show(), nó sẽ tự hiển thị khi được Add vào Controls
         }
     }
 }
