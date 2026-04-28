@@ -62,14 +62,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="QL_BanHangDataSet.cs">
-      <DependentUpon>QL_BanHangDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="QL_BanHangDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>QL_BanHangDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="View\BaoCao.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -113,17 +105,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="QL_BanHangDataSet.xsc">
-      <DependentUpon>QL_BanHangDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="QL_BanHangDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>QL_BanHangDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="QL_BanHangDataSet.xss">
-      <DependentUpon>QL_BanHangDataSet.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
