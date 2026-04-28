@@ -42,15 +42,9 @@ namespace PMQLBanDoTheThao
 
         private void btnQuanLyKhachHang_Click(object sender, EventArgs e)
         {
-            panelContent.Controls.Clear();
-
-            View.QuanLyKhachHang frmKhachHang = new View.QuanLyKhachHang();
-
-            frmKhachHang.TopLevel = false;                 
-            frmKhachHang.FormBorderStyle = FormBorderStyle.None; 
-            frmKhachHang.Dock = DockStyle.Fill;            
-            panelContent.Controls.Add(frmKhachHang);
-            frmKhachHang.Show();
+            // Sử dụng hàm LoadControl bạn đã viết để truyền UserControl vào
+            // Cách này tự động xử lý panelContent.Controls.Clear() và DockStyle.Fill
+            LoadControl(new View.QuanLyKhachHang());
         }
 
         private void btnQuanLyNhanVien_Click(object sender, EventArgs e)

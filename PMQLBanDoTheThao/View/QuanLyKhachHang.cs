@@ -1,27 +1,21 @@
 ﻿using PMQLBanDoTheThao.Controller;
-using PMQLBanDoTheThao.DataBase;
 using PMQLBanDoTheThao.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 namespace PMQLBanDoTheThao.View
 {
-    public partial class QuanLyKhachHang : Form
+    // Đảm bảo class kế thừa UserControl và tên class đúng ý bạn
+    public partial class QuanLyKhachHang : UserControl
     {
         private QuanLyKhachHangController controller = new QuanLyKhachHangController();
-
-        // Biến lưu Id khách hàng đang chọn (Mặc định -1 là chưa chọn ai)
         private int selectedCustomerId = -1;
 
         public QuanLyKhachHang()
         {
             InitializeComponent();
+            LoadData();
         }
 
         private void QuanLyKhachHang_Load(object sender, EventArgs e)
@@ -31,125 +25,103 @@ namespace PMQLBanDoTheThao.View
 
         private void LoadData()
         {
-            CustomerDB db = new CustomerDB();
-            dgvKhachHang.DataSource = db.GetAll();
+            try
+            {
+                var danhSach = controller.XuLyTimKiem("");
+                dgvKhachHang.DataSource = danhSach;
 
-            // Đặt tên cột cho DataGridView
-            dgvKhachHang.Columns["Id"].HeaderText = "Mã KH";
-            dgvKhachHang.Columns["Name"].HeaderText = "Tên Khách Hàng";
-            dgvKhachHang.Columns["Phone"].HeaderText = "Số Điện Thoại";
-            dgvKhachHang.Columns["Address"].HeaderText = "Địa Chỉ";
+                if (dgvKhachHang.Columns.Count > 0)
+                {
+                    if (dgvKhachHang.Columns["Id"] != null) dgvKhachHang.Columns["Id"].HeaderText = "Mã KH";
+                    if (dgvKhachHang.Columns["Name"] != null) dgvKhachHang.Columns["Name"].HeaderText = "Tên Khách Hàng";
+                    if (dgvKhachHang.Columns["Phone"] != null) dgvKhachHang.Columns["Phone"].HeaderText = "Số Điện Thoại";
+                    if (dgvKhachHang.Columns["Address"] != null) dgvKhachHang.Columns["Address"].HeaderText = "Địa Chỉ";
+                }
+            }
+            catch (Exception ex)
+            {
+                // Tránh lỗi khi Designer cố render dữ liệu
+            }
         }
 
-        // Sự kiện khi bấm nút Thêm
         private void btnThem_Click(object sender, EventArgs e)
         {
             Customer newCustomer = new Customer()
             {
-                Name = txtHoTen.Text,
-                Phone = txtSdt.Text,
-                Address = txtEmail.Text
+                Name = txtHoTen.Text.Trim(),
+                Phone = txtSdt.Text.Trim(),
+                Address = txtEmail.Text.Trim()
             };
 
             string thongBao = controller.XuLyThemKhachHang(newCustomer);
-            MessageBox.Show(thongBao);
-            LoadData(); // Load lại bảng sau khi thêm
+            MessageBox.Show(thongBao, "Thông báo");
+            LoadData();
         }
 
-        // Sự kiện khi bấm vào 1 dòng trong bảng
         private void dgvKhachHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvKhachHang.Rows[e.RowIndex];
-
                 selectedCustomerId = Convert.ToInt32(row.Cells["Id"].Value);
-
-                txtHoTen.Text = row.Cells["Name"].Value.ToString();
-                txtSdt.Text = row.Cells["Phone"].Value.ToString();
-                txtEmail.Text = row.Cells["Address"].Value.ToString();
+                txtHoTen.Text = row.Cells["Name"].Value?.ToString();
+                txtSdt.Text = row.Cells["Phone"].Value?.ToString();
+                txtEmail.Text = row.Cells["Address"].Value?.ToString();
             }
         }
 
-        // Sự kiện nút Sửa (Gọi qua Controller)
         private void btnSua_Click(object sender, EventArgs e)
         {
             if (selectedCustomerId == -1)
             {
-                MessageBox.Show("Vui lòng chọn một khách hàng từ danh sách để sửa!");
+                MessageBox.Show("Vui lòng chọn một khách hàng!");
                 return;
             }
 
             Customer cusUpdate = new Customer()
             {
                 Id = selectedCustomerId,
-                Name = txtHoTen.Text,
-                Phone = txtSdt.Text,
-                Address = txtEmail.Text
+                Name = txtHoTen.Text.Trim(),
+                Phone = txtSdt.Text.Trim(),
+                Address = txtEmail.Text.Trim()
             };
 
-            // Chuyển việc gọi DataBase sang cho Controller xử lý
             string thongBao = controller.XuLySuaKhachHang(cusUpdate);
             MessageBox.Show(thongBao);
-
-            // Nếu thành công thì mới tải lại dữ liệu bảng
-            if (thongBao == "Cập nhật thành công!")
-            {
-                LoadData();
-            }
+            if (thongBao.Contains("thành công")) LoadData();
         }
 
-        // Sự kiện nút Xóa (Gọi qua Controller)
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (selectedCustomerId == -1)
-            {
-                MessageBox.Show("Vui lòng chọn một khách hàng từ danh sách để xóa!");
-                return;
-            }
+            if (selectedCustomerId == -1) return;
 
-            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
+            if (MessageBox.Show("Xóa khách hàng này?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                // Chuyển việc gọi DataBase sang cho Controller xử lý
                 if (controller.XuLyXoaKhachHang(selectedCustomerId))
                 {
-                    MessageBox.Show("Xóa thành công!");
-                    selectedCustomerId = -1; // Reset lại trạng thái
-
-                    // Xóa trắng các ô TextBox
-                    txtHoTen.Clear();
-                    txtSdt.Clear();
-                    txtEmail.Clear();
-
+                    LamMoiGiaoDien();
                     LoadData();
-                }
-                else
-                {
-                    MessageBox.Show("Xóa thất bại!");
                 }
             }
         }
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            // Xóa trắng các ô nhập
+            LamMoiGiaoDien();
+            LoadData();
+        }
+
+        private void LamMoiGiaoDien()
+        {
             txtHoTen.Clear();
             txtSdt.Clear();
-            txtEmail.Clear(); // Dù tên là txtEmail nhưng bạn đang dùng cho Address
-
-            // Reset lại biến chọn khách hàng
+            txtEmail.Clear();
             selectedCustomerId = -1;
-
-            // Tải lại danh sách từ đầu
-            LoadData();
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            string tuKhoa = txtTimKiem.Text;
-            dgvKhachHang.DataSource = controller.XuLyTimKiem(tuKhoa);
+            dgvKhachHang.DataSource = controller.XuLyTimKiem(txtTimKiem.Text.Trim());
         }
-    } // Kết thúc đúng class ở đây
+    }
 }

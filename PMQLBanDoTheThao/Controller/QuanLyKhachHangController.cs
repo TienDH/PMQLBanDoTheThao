@@ -1,89 +1,102 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
 using PMQLBanDoTheThao.Model;
 using PMQLBanDoTheThao.DataBase;
+
 namespace PMQLBanDoTheThao.Controller
 {
     public class QuanLyKhachHangController
     {
-        // Khởi tạo kết nối DB dùng chung cho cả class
-        private CustomerDB db = new CustomerDB();
-
-        // ==========================================
-        // 1. Hàm xử lý logic THÊM khách hàng
-        // ==========================================
+     
         public List<Customer> XuLyTimKiem(string tuKhoa)
         {
-            if (string.IsNullOrWhiteSpace(tuKhoa))
+            List<Customer> danhSach = new List<Customer>();
+            string sql = "SELECT * FROM Customer";
+            SqlParameter[] pa = null;
+
+            if (!string.IsNullOrWhiteSpace(tuKhoa))
             {
-                return db.GetAll(); // Nếu không gõ gì mà bấm tìm thì ra tất cả
+                sql += " WHERE Name LIKE @key OR Phone LIKE @key";
+                pa = new SqlParameter[] { new SqlParameter("@key", "%" + tuKhoa.Trim() + "%") };
             }
-            return db.TimKiemKhachHang(tuKhoa.Trim());
+
+            DataTable dt = DBConnection.GetDataTable(sql, pa);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                danhSach.Add(new Customer
+                {
+                    Id = Convert.ToInt32(row["Id"]),
+                    Name = row["Name"].ToString(),
+                    Phone = row["Phone"].ToString(),
+                    Address = row["Address"].ToString()
+                });
+            }
+            return danhSach;
         }
+
+        // ==========================================
+        // 2. THÊM KHÁCH HÀNG
+        // ==========================================
         public string XuLyThemKhachHang(Customer cus)
         {
-            // Kiểm tra rỗng
             if (string.IsNullOrWhiteSpace(cus.Name) || string.IsNullOrWhiteSpace(cus.Phone))
-            {
                 return "Tên và số điện thoại không được để trống!";
-            }
+
+            string sql = "INSERT INTO Customer (Name, Phone, Address) VALUES (@name, @phone, @address)";
 
             try
             {
-                // Tiến hành thêm vào DB
-                bool ketQua = db.ThemKhachHang(cus);
-                if (ketQua)
+                using (SqlConnection con = DBConnection.GetDBConnection())
                 {
-                    return "Thêm khách hàng thành công!";
-                }
-                else
-                {
-                    return "Có lỗi xảy ra, không thể thêm.";
+                    SqlCommand cmd = new SqlCommand(sql, con);
+                    cmd.Parameters.AddWithValue("@name", cus.Name);
+                    cmd.Parameters.AddWithValue("@phone", cus.Phone);
+                    cmd.Parameters.AddWithValue("@address", cus.Address);
+                    con.Open();
+                    return cmd.ExecuteNonQuery() > 0 ? "Thêm thành công!" : "Không thể thêm.";
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                // Bắt lỗi nếu nhập trùng số điện thoại (Vi phạm UNIQUE trong SQL)
-                if (ex.Message.Contains("UNIQUE KEY") || ex.Message.Contains("duplicate"))
-                {
-                    return "Lỗi: Số điện thoại này đã tồn tại trong hệ thống!";
-                }
-                return "Lỗi cơ sở dữ liệu: " + ex.Message;
+                return ex.Message.Contains("UNIQUE") ? "Số điện thoại đã tồn tại!" : "Lỗi: " + ex.Message;
             }
         }
 
         // ==========================================
-        // 2. Hàm xử lý logic SỬA khách hàng
+        // 3. SỬA KHÁCH HÀNG
         // ==========================================
         public string XuLySuaKhachHang(Customer cus)
         {
-            // Kiểm tra rỗng
-            if (string.IsNullOrWhiteSpace(cus.Name) || string.IsNullOrWhiteSpace(cus.Phone))
-            {
-                return "Tên và số điện thoại không được để trống!";
-            }
+            string sql = "UPDATE Customer SET Name=@name, Phone=@phone, Address=@address WHERE Id=@id";
 
-            // Gọi xuống DataBase để lưu
-            bool ketQua = db.SuaKhachHang(cus);
-            if (ketQua)
+            using (SqlConnection con = DBConnection.GetDBConnection())
             {
-                return "Cập nhật thành công!";
-            }
-            else
-            {
-                return "Cập nhật thất bại! Vui lòng thử lại.";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@name", cus.Name);
+                cmd.Parameters.AddWithValue("@phone", cus.Phone);
+                cmd.Parameters.AddWithValue("@address", cus.Address);
+                cmd.Parameters.AddWithValue("@id", cus.Id);
+                con.Open();
+                return cmd.ExecuteNonQuery() > 0 ? "Cập nhật thành công!" : "Thất bại.";
             }
         }
 
         // ==========================================
-        // 3. Hàm xử lý logic XÓA khách hàng
+        // 4. XÓA KHÁCH HÀNG
         // ==========================================
         public bool XuLyXoaKhachHang(int id)
         {
-            return db.XoaKhachHang(id);
+            string sql = "DELETE FROM Customer WHERE Id=@id";
+            using (SqlConnection con = DBConnection.GetDBConnection())
+            {
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                return cmd.ExecuteNonQuery() > 0;
+            }
         }
     }
 }
