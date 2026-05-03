@@ -32,6 +32,8 @@
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btnTimKiem = new System.Windows.Forms.Button();
+            this.lblDiaChi = new System.Windows.Forms.Label();
+            this.txtDiaChi = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKhachHang)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -41,14 +43,17 @@
             this.dgvKhachHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvKhachHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvKhachHang.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvKhachHang.Location = new System.Drawing.Point(0, 260);
+            this.dgvKhachHang.Location = new System.Drawing.Point(0, 292);
             this.dgvKhachHang.Name = "dgvKhachHang";
             this.dgvKhachHang.RowHeadersWidth = 51;
-            this.dgvKhachHang.Size = new System.Drawing.Size(1083, 459);
+            this.dgvKhachHang.Size = new System.Drawing.Size(1083, 427);
             this.dgvKhachHang.TabIndex = 1;
+            this.dgvKhachHang.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKhachHang_CellClick);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtDiaChi);
+            this.groupBox1.Controls.Add(this.lblDiaChi);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.lblHoTen);
             this.groupBox1.Controls.Add(this.txtHoTen);
@@ -65,7 +70,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1083, 260);
+            this.groupBox1.Size = new System.Drawing.Size(1083, 292);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin khách hàng";
@@ -107,6 +112,7 @@
             // txtSdt
             // 
             this.txtSdt.Location = new System.Drawing.Point(130, 117);
+            this.txtSdt.MaxLength = 11;
             this.txtSdt.Name = "txtSdt";
             this.txtSdt.Size = new System.Drawing.Size(200, 22);
             this.txtSdt.TabIndex = 4;
@@ -128,7 +134,7 @@
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(33, 180);
+            this.btnThem.Location = new System.Drawing.Point(40, 206);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(110, 45);
             this.btnThem.TabIndex = 7;
@@ -137,7 +143,7 @@
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(160, 180);
+            this.btnSua.Location = new System.Drawing.Point(167, 206);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(110, 45);
             this.btnSua.TabIndex = 8;
@@ -146,7 +152,7 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(290, 180);
+            this.btnXoa.Location = new System.Drawing.Point(297, 206);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(110, 45);
             this.btnXoa.TabIndex = 9;
@@ -155,7 +161,7 @@
             // 
             // btnLamMoi
             // 
-            this.btnLamMoi.Location = new System.Drawing.Point(420, 180);
+            this.btnLamMoi.Location = new System.Drawing.Point(427, 206);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(110, 45);
             this.btnLamMoi.TabIndex = 10;
@@ -164,19 +170,35 @@
             // 
             // txtTimKiem
             // 
-            this.txtTimKiem.Location = new System.Drawing.Point(550, 117);
+            this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTimKiem.Location = new System.Drawing.Point(660, 206);
             this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(200, 22);
+            this.txtTimKiem.Size = new System.Drawing.Size(200, 26);
             this.txtTimKiem.TabIndex = 11;
             // 
             // btnTimKiem
             // 
-            this.btnTimKiem.Location = new System.Drawing.Point(670, 155);
+            this.btnTimKiem.Location = new System.Drawing.Point(884, 204);
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(80, 28);
             this.btnTimKiem.TabIndex = 12;
             this.btnTimKiem.Text = "Tìm kiếm";
             this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
+            // 
+            // lblDiaChi
+            // 
+            this.lblDiaChi.Location = new System.Drawing.Point(380, 120);
+            this.lblDiaChi.Name = "lblDiaChi";
+            this.lblDiaChi.Size = new System.Drawing.Size(60, 23);
+            this.lblDiaChi.TabIndex = 13;
+            this.lblDiaChi.Text = "Địa chỉ";
+            // 
+            // txtDiaChi
+            // 
+            this.txtDiaChi.Location = new System.Drawing.Point(450, 117);
+            this.txtDiaChi.Name = "txtDiaChi";
+            this.txtDiaChi.Size = new System.Drawing.Size(300, 22);
+            this.txtDiaChi.TabIndex = 14;
             // 
             // QuanLyKhachHang
             // 
@@ -210,5 +232,7 @@
         private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.TextBox txtTimKiem;
         private System.Windows.Forms.Button btnTimKiem;
+        private System.Windows.Forms.TextBox txtDiaChi;
+        private System.Windows.Forms.Label lblDiaChi;
     }
 }

@@ -9,8 +9,9 @@ namespace PMQLBanDoTheThao.Model
     public class Customer
     {
         public int Id { get; set; }
-        public string Name { get; set; } // Khớp với cột Name
-        public string Phone { get; set; } // Khớp với cột Phone
-        public string Address { get; set; } // Khớp với cột Address
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; } // Thêm mới cột Email
     }
 }

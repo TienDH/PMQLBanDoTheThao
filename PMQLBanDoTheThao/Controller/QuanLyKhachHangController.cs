@@ -9,7 +9,6 @@ namespace PMQLBanDoTheThao.Controller
 {
     public class QuanLyKhachHangController
     {
-     
         public List<Customer> XuLyTimKiem(string tuKhoa)
         {
             List<Customer> danhSach = new List<Customer>();
@@ -18,7 +17,7 @@ namespace PMQLBanDoTheThao.Controller
 
             if (!string.IsNullOrWhiteSpace(tuKhoa))
             {
-                sql += " WHERE Name LIKE @key OR Phone LIKE @key";
+                sql += " WHERE Name LIKE @key OR Phone LIKE @key OR Email LIKE @key";
                 pa = new SqlParameter[] { new SqlParameter("@key", "%" + tuKhoa.Trim() + "%") };
             }
 
@@ -31,21 +30,21 @@ namespace PMQLBanDoTheThao.Controller
                     Id = Convert.ToInt32(row["Id"]),
                     Name = row["Name"].ToString(),
                     Phone = row["Phone"].ToString(),
-                    Address = row["Address"].ToString()
+                    Address = row["Address"] != DBNull.Value ? row["Address"].ToString() : "",
+                    // Kiểm tra NULL vì các khách hàng cũ chưa có Email
+                    Email = row["Email"] != DBNull.Value ? row["Email"].ToString() : ""
                 });
             }
             return danhSach;
         }
 
-        // ==========================================
-        // 2. THÊM KHÁCH HÀNG
-        // ==========================================
         public string XuLyThemKhachHang(Customer cus)
         {
             if (string.IsNullOrWhiteSpace(cus.Name) || string.IsNullOrWhiteSpace(cus.Phone))
                 return "Tên và số điện thoại không được để trống!";
 
-            string sql = "INSERT INTO Customer (Name, Phone, Address) VALUES (@name, @phone, @address)";
+            // Thêm Email vào câu lệnh INSERT
+            string sql = "INSERT INTO Customer (Name, Phone, Address, Email) VALUES (@name, @phone, @address, @email)";
 
             try
             {
@@ -55,6 +54,7 @@ namespace PMQLBanDoTheThao.Controller
                     cmd.Parameters.AddWithValue("@name", cus.Name);
                     cmd.Parameters.AddWithValue("@phone", cus.Phone);
                     cmd.Parameters.AddWithValue("@address", cus.Address);
+                    cmd.Parameters.AddWithValue("@email", cus.Email);
                     con.Open();
                     return cmd.ExecuteNonQuery() > 0 ? "Thêm thành công!" : "Không thể thêm.";
                 }
@@ -65,12 +65,10 @@ namespace PMQLBanDoTheThao.Controller
             }
         }
 
-        // ==========================================
-        // 3. SỬA KHÁCH HÀNG
-        // ==========================================
         public string XuLySuaKhachHang(Customer cus)
         {
-            string sql = "UPDATE Customer SET Name=@name, Phone=@phone, Address=@address WHERE Id=@id";
+            // Thêm Email vào câu lệnh UPDATE
+            string sql = "UPDATE Customer SET Name=@name, Phone=@phone, Address=@address, Email=@email WHERE Id=@id";
 
             using (SqlConnection con = DBConnection.GetDBConnection())
             {
@@ -78,24 +76,29 @@ namespace PMQLBanDoTheThao.Controller
                 cmd.Parameters.AddWithValue("@name", cus.Name);
                 cmd.Parameters.AddWithValue("@phone", cus.Phone);
                 cmd.Parameters.AddWithValue("@address", cus.Address);
+                cmd.Parameters.AddWithValue("@email", cus.Email);
                 cmd.Parameters.AddWithValue("@id", cus.Id);
                 con.Open();
                 return cmd.ExecuteNonQuery() > 0 ? "Cập nhật thành công!" : "Thất bại.";
             }
         }
 
-        // ==========================================
-        // 4. XÓA KHÁCH HÀNG
-        // ==========================================
         public bool XuLyXoaKhachHang(int id)
         {
             string sql = "DELETE FROM Customer WHERE Id=@id";
-            using (SqlConnection con = DBConnection.GetDBConnection())
+            try
             {
-                SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@id", id);
-                con.Open();
-                return cmd.ExecuteNonQuery() > 0;
+                using (SqlConnection con = DBConnection.GetDBConnection())
+                {
+                    SqlCommand cmd = new SqlCommand(sql, con);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    con.Open();
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (SqlException)
+            {
+                return false;
             }
         }
     }
