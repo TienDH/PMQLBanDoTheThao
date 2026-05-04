@@ -19,6 +19,7 @@
         {
             this.panelTop = new System.Windows.Forms.Panel();
             this.groupSanPham = new System.Windows.Forms.GroupBox();
+            this.btnLamMoi2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cboSanPham = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -30,11 +31,9 @@
             this.btnThem = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnLamMoi2 = new System.Windows.Forms.Button();
             this.txtVoucher = new System.Windows.Forms.TextBox();
             this.txtMaVoucher = new System.Windows.Forms.Button();
             this.lblGiamGia = new System.Windows.Forms.Label();
-
             this.panelBottom = new System.Windows.Forms.Panel();
             this.groupThanhToan = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -46,15 +45,12 @@
             this.lblTongTien = new System.Windows.Forms.Label();
             this.btnXuatHoaDon = new System.Windows.Forms.Button();
             this.btnThanhToan = new System.Windows.Forms.Button();
-
             this.panelFill = new System.Windows.Forms.Panel();
             this.dgvGioHang = new System.Windows.Forms.DataGridView();
-
             this.panelHeader = new System.Windows.Forms.Panel();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.btnlammoi = new System.Windows.Forms.Button();
-
             this.panelTop.SuspendLayout();
             this.groupSanPham.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmSoLuong)).BeginInit();
@@ -63,7 +59,6 @@
             this.panelFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGioHang)).BeginInit();
             this.SuspendLayout();
-
             // 
             // panelTop
             // 
@@ -73,7 +68,7 @@
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
             this.panelTop.Padding = new System.Windows.Forms.Padding(15);
-            this.panelTop.Size = new System.Drawing.Size(961, 185); // Nới rộng panelTop
+            this.panelTop.Size = new System.Drawing.Size(961, 185);
             this.panelTop.TabIndex = 0;
             // 
             // groupSanPham
@@ -91,19 +86,32 @@
             this.groupSanPham.Controls.Add(this.btnThem);
             this.groupSanPham.Controls.Add(this.button1);
             this.groupSanPham.Controls.Add(this.button2);
-            // ĐÃ CHUYỂN VOUCHER VÀO ĐÂY
             this.groupSanPham.Controls.Add(this.txtVoucher);
             this.groupSanPham.Controls.Add(this.txtMaVoucher);
             this.groupSanPham.Controls.Add(this.lblGiamGia);
-
             this.groupSanPham.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupSanPham.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.groupSanPham.Location = new System.Drawing.Point(15, 15);
             this.groupSanPham.Name = "groupSanPham";
-            this.groupSanPham.Size = new System.Drawing.Size(931, 155); // Nới rộng GroupBox
+            this.groupSanPham.Size = new System.Drawing.Size(931, 155);
             this.groupSanPham.TabIndex = 0;
             this.groupSanPham.TabStop = false;
             this.groupSanPham.Text = " Chọn Sản Phẩm & Khuyến Mãi ";
+            // 
+            // btnLamMoi2
+            // 
+            this.btnLamMoi2.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.btnLamMoi2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLamMoi2.FlatAppearance.BorderSize = 0;
+            this.btnLamMoi2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLamMoi2.ForeColor = System.Drawing.Color.White;
+            this.btnLamMoi2.Location = new System.Drawing.Point(770, 75);
+            this.btnLamMoi2.Name = "btnLamMoi2";
+            this.btnLamMoi2.Size = new System.Drawing.Size(110, 35);
+            this.btnLamMoi2.TabIndex = 11;
+            this.btnLamMoi2.Text = "Làm Mới";
+            this.btnLamMoi2.UseVisualStyleBackColor = false;
+            this.btnLamMoi2.Click += new System.EventHandler(this.btnlammoi_Click);
             // 
             // label1
             // 
@@ -225,21 +233,6 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnLamMoi2
-            // 
-            this.btnLamMoi2.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.btnLamMoi2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLamMoi2.FlatAppearance.BorderSize = 0;
-            this.btnLamMoi2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLamMoi2.ForeColor = System.Drawing.Color.White;
-            this.btnLamMoi2.Location = new System.Drawing.Point(770, 75);
-            this.btnLamMoi2.Name = "btnLamMoi2";
-            this.btnLamMoi2.Size = new System.Drawing.Size(110, 35);
-            this.btnLamMoi2.TabIndex = 11;
-            this.btnLamMoi2.Text = "Làm Mới";
-            this.btnLamMoi2.UseVisualStyleBackColor = false;
-            this.btnLamMoi2.Click += new System.EventHandler(this.btnlammoi_Click);
-            // 
             // txtVoucher
             // 
             this.txtVoucher.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -248,7 +241,6 @@
             this.txtVoucher.Name = "txtVoucher";
             this.txtVoucher.Size = new System.Drawing.Size(180, 30);
             this.txtVoucher.TabIndex = 12;
-            
             // 
             // txtMaVoucher
             // 
@@ -284,7 +276,7 @@
             this.panelBottom.Location = new System.Drawing.Point(0, 663);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Padding = new System.Windows.Forms.Padding(15, 0, 15, 15);
-            this.panelBottom.Size = new System.Drawing.Size(961, 190); // Thu nhỏ panelBottom
+            this.panelBottom.Size = new System.Drawing.Size(961, 190);
             this.panelBottom.TabIndex = 2;
             // 
             // groupThanhToan
@@ -367,7 +359,7 @@
             this.lblTongTien.AutoSize = true;
             this.lblTongTien.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
             this.lblTongTien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(77)))), ((int)(((byte)(45)))));
-            this.lblTongTien.Location = new System.Drawing.Point(420, 70); // Nâng nhãn tổng tiền lên
+            this.lblTongTien.Location = new System.Drawing.Point(420, 70);
             this.lblTongTien.Name = "lblTongTien";
             this.lblTongTien.Size = new System.Drawing.Size(164, 41);
             this.lblTongTien.TabIndex = 9;

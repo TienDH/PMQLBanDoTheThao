@@ -198,7 +198,7 @@ namespace PMQLBanDoTheThao
         {
             if (CheckPermission())
             {
-                LoadControl(new QuanLyHoaDon(productId));
+                LoadControl(new QuanLyHoaDon());
             }
         }
 
