@@ -171,7 +171,6 @@ namespace PMQLBanDoTheThao
 
         private void btnQuanLyKhachHang_Click(object sender, EventArgs e)
         {
-            // Merge logic Quản lý khách hàng vào đây
             if (CheckPermission("Admin"))
             {
                 LoadControl(new PMQLBanDoTheThao.View.QuanLyKhachHang());
@@ -180,10 +179,10 @@ namespace PMQLBanDoTheThao
 
         private void btnThongKeBaoCao_Click(object sender, EventArgs e)
         {
+            // Tích hợp logic Báo cáo mới và CheckPermission của Master
             if (CheckPermission("Admin"))
             {
-                // Hiện tại code Báo Cáo chưa được merge vào Master sạch, tạm thời để MessageBox
-                MessageBox.Show("Tính năng Thống kê báo cáo đang được phát triển!", "Thông báo");
+                LoadControl(new PMQLBanDoTheThao.View.BaoCao());
             }
         }
 

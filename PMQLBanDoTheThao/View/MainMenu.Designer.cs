@@ -28,8 +28,6 @@
             this.btnQuanLyHoaDon = new System.Windows.Forms.Button();
             this.btnTrangchu = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.picLogo = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
             this.btnDangNhap = new System.Windows.Forms.Button();
             this.lblPageTitle = new System.Windows.Forms.Label();
@@ -37,16 +35,17 @@
             this.panelMain = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.zToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.picLogo = new System.Windows.Forms.PictureBox();
             this.panelLeft.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.panelTop.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLeft
             // 
-            this.panelLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
+            this.panelLeft.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panelLeft.Controls.Add(this.btnThongKeBaoCao);
             this.panelLeft.Controls.Add(this.btnQuanLyNhanVien);
             this.panelLeft.Controls.Add(this.btnQuanLyKhachHang);
@@ -64,6 +63,7 @@
             // 
             // btnThongKeBaoCao
             // 
+            this.btnThongKeBaoCao.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnThongKeBaoCao.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnThongKeBaoCao.FlatAppearance.BorderSize = 0;
             this.btnThongKeBaoCao.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(77)))), ((int)(((byte)(45)))));
@@ -77,10 +77,12 @@
             this.btnThongKeBaoCao.TabIndex = 2;
             this.btnThongKeBaoCao.Text = "  Thống Kê Báo Cáo";
             this.btnThongKeBaoCao.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnThongKeBaoCao.UseVisualStyleBackColor = false;
             this.btnThongKeBaoCao.Click += new System.EventHandler(this.btnThongKeBaoCao_Click);
             // 
             // btnQuanLyNhanVien
             // 
+            this.btnQuanLyNhanVien.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnQuanLyNhanVien.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnQuanLyNhanVien.FlatAppearance.BorderSize = 0;
             this.btnQuanLyNhanVien.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(77)))), ((int)(((byte)(45)))));
@@ -94,10 +96,12 @@
             this.btnQuanLyNhanVien.TabIndex = 4;
             this.btnQuanLyNhanVien.Text = "  Nhân Viên";
             this.btnQuanLyNhanVien.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnQuanLyNhanVien.UseVisualStyleBackColor = false;
             this.btnQuanLyNhanVien.Click += new System.EventHandler(this.btnQuanLyNhanVien_Click);
             // 
             // btnQuanLyKhachHang
             // 
+            this.btnQuanLyKhachHang.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnQuanLyKhachHang.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnQuanLyKhachHang.FlatAppearance.BorderSize = 0;
             this.btnQuanLyKhachHang.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(77)))), ((int)(((byte)(45)))));
@@ -111,10 +115,12 @@
             this.btnQuanLyKhachHang.TabIndex = 5;
             this.btnQuanLyKhachHang.Text = "  Khách Hàng";
             this.btnQuanLyKhachHang.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnQuanLyKhachHang.UseVisualStyleBackColor = false;
             this.btnQuanLyKhachHang.Click += new System.EventHandler(this.btnQuanLyKhachHang_Click);
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.button1.Dock = System.Windows.Forms.DockStyle.Top;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(77)))), ((int)(((byte)(45)))));
@@ -128,10 +134,12 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "  Khuyến Mãi (Voucher)";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnLoaiSP
             // 
+            this.btnLoaiSP.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnLoaiSP.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnLoaiSP.FlatAppearance.BorderSize = 0;
             this.btnLoaiSP.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(77)))), ((int)(((byte)(45)))));
@@ -145,10 +153,12 @@
             this.btnLoaiSP.TabIndex = 1;
             this.btnLoaiSP.Text = "  Loại Sản Phẩm";
             this.btnLoaiSP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLoaiSP.UseVisualStyleBackColor = false;
             this.btnLoaiSP.Click += new System.EventHandler(this.btnLoaiSP_Click);
             // 
             // btnQuanLySanPham
             // 
+            this.btnQuanLySanPham.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnQuanLySanPham.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnQuanLySanPham.FlatAppearance.BorderSize = 0;
             this.btnQuanLySanPham.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(77)))), ((int)(((byte)(45)))));
@@ -162,10 +172,12 @@
             this.btnQuanLySanPham.TabIndex = 7;
             this.btnQuanLySanPham.Text = "  Sản Phẩm";
             this.btnQuanLySanPham.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnQuanLySanPham.UseVisualStyleBackColor = false;
             this.btnQuanLySanPham.Click += new System.EventHandler(this.btnQuanLySanPham_Click_1);
             // 
             // btnQuanLyHoaDon
             // 
+            this.btnQuanLyHoaDon.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnQuanLyHoaDon.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnQuanLyHoaDon.FlatAppearance.BorderSize = 0;
             this.btnQuanLyHoaDon.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(77)))), ((int)(((byte)(45)))));
@@ -179,10 +191,12 @@
             this.btnQuanLyHoaDon.TabIndex = 6;
             this.btnQuanLyHoaDon.Text = "  Hóa Đơn / Bán Hàng";
             this.btnQuanLyHoaDon.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnQuanLyHoaDon.UseVisualStyleBackColor = false;
             this.btnQuanLyHoaDon.Click += new System.EventHandler(this.btnQuanLyHoaDon_Click);
             // 
             // btnTrangchu
             // 
+            this.btnTrangchu.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnTrangchu.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnTrangchu.FlatAppearance.BorderSize = 0;
             this.btnTrangchu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(77)))), ((int)(((byte)(45)))));
@@ -196,38 +210,18 @@
             this.btnTrangchu.TabIndex = 8;
             this.btnTrangchu.Text = "  Trang Chủ";
             this.btnTrangchu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTrangchu.UseVisualStyleBackColor = false;
             this.btnTrangchu.Click += new System.EventHandler(this.btnTrangchu_Click);
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(77)))), ((int)(((byte)(45)))));
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.panel3.Controls.Add(this.picLogo);
-            this.panel3.Controls.Add(this.label1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(240, 75);
             this.panel3.TabIndex = 2;
-            // 
-            // picLogo
-            // 
-            this.picLogo.Location = new System.Drawing.Point(15, 17);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(40, 40);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLogo.TabIndex = 1;
-            this.picLogo.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(60, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(170, 32);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "SPORT STORE";
             // 
             // panelTop
             // 
@@ -301,6 +295,15 @@
             this.zToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
             this.zToolStripMenuItem.Text = "z";
             // 
+            // picLogo
+            // 
+            this.picLogo.Location = new System.Drawing.Point(15, 17);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(40, 40);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 1;
+            this.picLogo.TabStop = false;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -315,11 +318,10 @@
             this.Load += new System.EventHandler(this.MainMenu_Load);
             this.panelLeft.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -337,13 +339,12 @@
         private System.Windows.Forms.Button btnQuanLyHoaDon;
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnDangNhap;
         private System.Windows.Forms.Button btnLoaiSP;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnTrangchu;
-        private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.Label lblPageTitle;
         private System.Windows.Forms.Panel panelTopBorder;
+        private System.Windows.Forms.PictureBox picLogo;
     }
 }

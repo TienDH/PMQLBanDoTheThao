@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PMQLBanDoTheThao.DataBase
 {
@@ -52,6 +48,22 @@ namespace PMQLBanDoTheThao.DataBase
                         da.Fill(dt);
                         return dt;
                     }
+                }
+            }
+        }
+
+        // Hàm lấy một giá trị duy nhất (Ví dụ: Count, Sum)
+        public static object ExecuteScalar(string sql, SqlParameter[] pa = null)
+        {
+            using (SqlConnection conn = GetDBConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    if (pa != null)
+                        cmd.Parameters.AddRange(pa);
+
+                    conn.Open();
+                    return cmd.ExecuteScalar();
                 }
             }
         }

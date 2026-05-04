@@ -76,6 +76,14 @@ namespace PMQLBanDoTheThao.View
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-       
+        private void Login_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUserName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
